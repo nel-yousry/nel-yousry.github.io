@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Halden · Lighting design studio, Milan</title>
+<meta name="description" content="Halden designs light for spaces, brands and events. Concept, engineering and on-site commissioning from one studio in Milan.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050505;--s1:#0d0d0c;--s2:#141413;--ln:rgba(239,232,168,.16);--tx:#ece9dc;--mu:#9b988a;--y:#EFE8A8;--f:'Hanken Grotesk',system-ui,sans-serif;color-scheme:dark;--px:max(20px,env(safe-area-inset-left),env(safe-area-inset-right))}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px;background:var(--bg)}
+body{font:300 1.02rem/1.65 var(--f);color:var(--tx);background:var(--bg);overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom)}
+a{color:inherit}button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--y);outline-offset:3px}
+h1,h2,h3{font-weight:200;letter-spacing:-.025em;line-height:1.02}
+h2{font-size:clamp(2.3rem,7.5vw,5rem)}.sec{padding:clamp(4.5rem,11vw,9rem) var(--px)}.wrap{max-width:1240px;margin:auto}
+.mu{color:var(--mu)}.k{font-size:.85rem;color:var(--y);margin-bottom:1.2rem;display:block}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:0;min-height:48px;border:1px solid var(--ln);background:none;cursor:pointer;text-decoration:none;font-weight:400;transition:border-color .25s}
+.btn span:first-child{padding:0 1.3rem}.btn .pl{align-self:stretch;width:48px;display:grid;place-items:center;background:var(--y);color:#111;font-size:1.4rem;font-weight:300;transition:transform .3s}
+.btn:hover{border-color:var(--y)}.btn:hover .pl{transform:rotate(90deg)}.btn.g{border-color:var(--ln)}
+/* nav */
+.nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:calc(10px + env(safe-area-inset-top)) var(--px) 10px;background:rgba(5,5,5,.72);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06)}
+.lg{font-weight:300;font-size:1.25rem;letter-spacing:.32em;text-decoration:none;min-height:44px;display:flex;align-items:center}
+.nav nav{display:none;position:fixed;inset:calc(64px + env(safe-area-inset-top)) 0 0;background:var(--bg);flex-direction:column;padding:2rem var(--px);gap:.2rem}.nav nav.open{display:flex}
+.nav nav a{font-size:2.2rem;font-weight:200;text-decoration:none;padding:.5rem 0;border-bottom:1px solid var(--ln)}.nav nav a[aria-current=true]{color:var(--y)}
+.nav .hb{display:none}.bur{width:44px;height:44px;background:none;border:1px solid var(--ln);display:grid;place-content:center;gap:6px;cursor:pointer}.bur i{width:18px;height:1px;background:var(--tx);display:block;transition:transform .3s}
+.bur[aria-expanded=true] i:first-child{transform:translateY(3.5px) rotate(45deg)}.bur[aria-expanded=true] i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+@media(min-width:900px){.nav nav{display:flex;position:static;flex-direction:row;padding:0;background:none;gap:2rem}.nav nav a{font-size:.92rem;font-weight:300;border:0;padding:.6rem 0;color:var(--mu)}.nav nav a:hover,.nav nav a[aria-current=true]{color:var(--tx)}.nav .hb{display:inline-flex}.bur,.nav nav .mo{display:none}}
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:110px var(--px) 3rem;overflow:hidden}
+#cv{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y}
+.hero .in{position:relative;pointer-events:none;max-width:1240px;margin:0 auto;width:100%}.hero .in>*{pointer-events:auto}
+.pills{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}.pills button{min-height:44px;padding:0 1.3rem;border-radius:999px;border:1px solid var(--ln);background:rgba(5,5,5,.6);cursor:pointer;transition:background .25s,color .25s}
+.pills button[aria-pressed=true]{background:var(--y);color:#111;border-color:var(--y)}
+.hero h1{font-size:clamp(2.9rem,10.5vw,8.4rem);max-width:13ch;transition:opacity .35s,transform .35s}.hero h1.sw{opacity:0;transform:translateY(12px)}
+.hero p.sub{max-width:46ch;color:var(--mu);margin:1.4rem 0 2rem;transition:opacity .35s}.hero p.sub.sw{opacity:0}
+/* works */
+.wk{padding:clamp(4.5rem,10vw,8rem) var(--px) 2rem}
+.pn{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:90px var(--px) 2.4rem;border-top:1px solid var(--ln);background:var(--s1)}
+.vis{position:absolute;inset:0}.pn .tp{position:absolute;top:90px;right:var(--px);font-size:.95rem;color:var(--y);font-variant-numeric:tabular-nums}
+.pn .bx{position:relative;max-width:1240px;margin:0 auto;width:100%;display:grid;gap:1.4rem;background:linear-gradient(transparent,rgba(5,5,5,.7) 40%);padding-top:4rem}
+.pn h3{font-size:clamp(2.4rem,8vw,5.6rem)}.mt{display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1.5rem;margin:0}@media(min-width:800px){.mt{grid-template-columns:repeat(4,1fr)}}
+.mt div{border-top:1px solid var(--ln);padding-top:.6rem}.mt dt{font-size:.78rem;color:var(--mu)}.mt dd{margin:0;font-weight:400}
+/* services */
+.sv{display:grid;gap:2rem;border-top:1px solid var(--ln);padding:2.4rem 0}@media(min-width:900px){.sv{grid-template-columns:1fr 1.2fr;gap:4rem}}
+.sv ol{list-style:none;padding:0;display:grid;gap:0}.sv li{display:grid;grid-template-columns:3rem 1fr;gap:.5rem;padding:1rem 0;border-bottom:1px solid var(--ln)}.sv li b{font-weight:300;color:var(--y);font-variant-numeric:tabular-nums}.sv li p{color:var(--mu);font-size:.95rem}.sv li strong{font-weight:400;display:block}
+/* deliverables */
+.dl{background:var(--s1)}.dg{display:grid;gap:0;margin-top:2.4rem;border-top:1px solid var(--ln)}@media(min-width:760px){.dg{grid-template-columns:1fr 1fr}}
+.dg div{padding:1.4rem 0;border-bottom:1px solid var(--ln);display:flex;gap:1rem}@media(min-width:760px){.dg div:nth-child(odd){padding-right:2rem}.dg div:nth-child(even){padding-left:2rem;border-left:1px solid var(--ln)}}
+.dg svg{flex:none;margin-top:.3rem}.dg strong{font-weight:400;display:block}.dg p{color:var(--mu);font-size:.95rem}
+/* note */
+.nt p{font-size:clamp(1.4rem,3.6vw,2.4rem);font-weight:200;line-height:1.3;max-width:26ch;margin-bottom:2rem;opacity:.12;transition:opacity 1s;letter-spacing:-.015em}.nt p.on{opacity:1}.nt .wrap{max-width:900px}
+/* form */
+.fm{background:var(--s1);border-top:1px solid var(--ln)}.fw{max-width:860px;margin:auto}
+.prog{display:flex;gap:6px;margin:2rem 0 .6rem}.prog i{flex:1;height:2px;background:var(--ln)}.prog i.on{background:var(--y)}
+.stn{display:flex;justify-content:space-between;color:var(--mu);font-size:.9rem;margin-bottom:2rem}.stn b{color:var(--y);font-weight:300}
+.step{display:none;border:0;padding:0;min-width:0}.step.on{display:grid;gap:1.1rem}.step legend{font-size:clamp(1.8rem,5vw,3rem);font-weight:200;letter-spacing:-.02em;margin-bottom:1.2rem;float:left;width:100%}.step legend+*{clear:both}
+.ch{display:flex;flex-wrap:wrap;gap:.6rem}.ch label{position:relative}.ch input{position:absolute;opacity:0;inset:0;cursor:pointer}.ch span{display:inline-flex;align-items:center;min-height:48px;padding:0 1.4rem;border:1px solid var(--ln);border-radius:999px;transition:background .2s,color .2s}
+.ch input:checked+span{background:var(--y);color:#111;border-color:var(--y)}.ch input:focus-visible+span{outline:2px solid var(--y);outline-offset:3px}
+label.fl{display:grid;gap:.4rem;font-size:.9rem;color:var(--mu)}
+.fm input[type=text],.fm input[type=email],.fm input[type=date],.fm textarea{width:100%;min-height:52px;padding:.8rem 1rem;background:#090909;border:1px solid var(--ln);color:var(--tx);border-radius:0}.fm textarea{min-height:140px;resize:vertical}
+.er{color:#ff9d8a;font-size:.85rem;min-height:1.2em}[aria-invalid=true]{border-color:#ff9d8a!important}
+.acts{display:flex;justify-content:space-between;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+.ok{display:none;padding:2rem;border:1px solid var(--y)}.ok.show{display:block}.ok h3{font-size:2.4rem;margin-bottom:.8rem}.ok li{list-style:none;padding:.4rem 0;border-bottom:1px solid var(--ln)}.ok ul{padding:0;margin-top:1rem}
+/* footer */
+footer{padding:4rem var(--px) 2rem;border-top:1px solid var(--ln)}.fg{display:grid;gap:2rem;grid-template-columns:1fr 1fr}.fg>div:first-child{grid-column:1/-1}@media(min-width:800px){.fg{grid-template-columns:2fr 1fr 1fr 1fr}.fg>div:first-child{grid-column:auto}}
+footer h4{font-weight:300;font-size:.85rem;color:var(--mu);margin-bottom:.5rem}footer a{display:block;text-decoration:none;padding:.5rem 0;min-height:44px}footer p{color:var(--mu);max-width:34ch;font-size:.92rem}
+.cr{margin-top:2rem;padding:1.2rem var(--px) calc(1.2rem + env(safe-area-inset-bottom));border-top:1px solid var(--ln);text-align:center;font-size:.85rem;color:var(--mu);background:#020202}.cr a{color:var(--y)}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .9s,transform .9s}.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}.rv{opacity:1;transform:none}.nt p{opacity:1}}
+</style>
+</head>
+<body id="top">
+<header class="nav">
+<a class="lg" href="#top" aria-label="Halden, home">HALDEN</a>
+<nav id="menu" aria-label="Main"><a href="#works">Works</a><a href="#services">Services</a><a href="#deliver">Deliverables</a><a href="#studio">Studio</a><a href="#inquiry">Inquiry</a><a class="mo" href="#inquiry">Start a project</a></nav>
+<a class="btn hb" href="#inquiry"><span>Start a project</span><span class="pl" aria-hidden="true">+</span></a>
+<button class="bur" id="bg" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><i></i><i></i></button>
+</header>
+<main>
+<section class="hero" aria-label="Introduction">
+<canvas id="cv" aria-hidden="true"></canvas>
+<div class="in">
+<div class="pills" role="group" aria-label="What are you lighting?"><button aria-pressed="true" data-i="0">Spaces</button><button aria-pressed="false" data-i="1">Brands</button><button aria-pressed="false" data-i="2">Events</button></div>
+<h1 id="hl" aria-live="polite">Light that shapes a room.</h1>
+<p class="sub" id="hs">Halden designs, engineers and commissions architectural light for homes, hotels and galleries across Europe.</p>
+<a class="btn" href="#inquiry"><span>Start a project</span><span class="pl" aria-hidden="true">+</span></a>
+</div></section>
+
+<section class="wk" id="works"><div class="wrap"><span class="k">Selected works</span><h2 class="rv">Three rooms, three kinds of dark.</h2></div></section>
+<div id="panels"></div>
+
+<section class="sec" id="services"><div class="wrap"><span class="k">Services</span><h2 class="rv">What we design</h2><div id="svc" style="margin-top:3rem"></div></div></section>
+
+<section class="sec dl" id="deliver"><div class="wrap"><span class="k">Deliverables</span><h2 class="rv">What you receive</h2><p class="mu rv" style="max-width:52ch;margin-top:1rem">Every project ends with documents your contractor can build from and light that someone on our team has adjusted on site.</p><div class="dg" id="dg"></div></div></section>
+
+<section class="sec nt" id="studio"><div class="wrap"><span class="k">Studio note</span>
+<p>We start by switching everything off.</p><p>A room tells you where it wants brightness once you stand in it after dark.</p><p>Then we add as little as we can, and place it where the eye already goes.</p><p>Fewer fittings, warmer lamps, better shadows. That is most of the craft.</p></div></section>
+
+<section class="sec fm" id="inquiry"><div class="fw"><span class="k">Inquiry</span><h2>Tell us about the light you need</h2>
+<form id="f" novalidate aria-label="Project inquiry">
+<div class="prog" id="pg" aria-hidden="true"></div><div class="stn"><span id="sn"></span><span id="st"></span></div>
+<fieldset class="step on" data-t="Shaping"><legend>What are we shaping?</legend><div class="ch" role="radiogroup" aria-label="Project type"><label><input type="radio" name="type" value="A space"><span>A space</span></label><label><input type="radio" name="type" value="A brand"><span>A brand</span></label><label><input type="radio" name="type" value="An event"><span>An event</span></label></div><span class="er" data-e="type"></span></fieldset>
+<fieldset class="step" data-t="Who"><legend>Who are we speaking with?</legend><label class="fl">Full name<input type="text" name="name" autocomplete="name"><span class="er" data-e="name"></span></label><label class="fl">Email<input type="email" name="email" autocomplete="email"><span class="er" data-e="email"></span></label><label class="fl">Company or studio (optional)<input type="text" name="co" autocomplete="organization"></label></fieldset>
+<fieldset class="step" data-t="Vision"><legend>Describe the mood you want</legend><label class="fl">Place, size, and how it should feel at night<textarea name="vision"></textarea><span class="er" data-e="vision"></span></label></fieldset>
+<fieldset class="step" data-t="Budget"><legend>What is the lighting budget?</legend><div class="ch" role="radiogroup" aria-label="Budget"><label><input type="radio" name="budget" value="Under €25k"><span>Under €25k</span></label><label><input type="radio" name="budget" value="€25k to €100k"><span>€25k to €100k</span></label><label><input type="radio" name="budget" value="€100k to €400k"><span>€100k to €400k</span></label><label><input type="radio" name="budget" value="Over €400k"><span>Over €400k</span></label></div><span class="er" data-e="budget"></span></fieldset>
+<fieldset class="step" data-t="Start date"><legend>When would you like to start?</legend><label class="fl">Preferred start date<input type="date" name="date"><span class="er" data-e="date"></span></label></fieldset>
+<div class="acts"><button type="button" class="btn g" id="bk"><span>Back</span></button><button type="submit" class="btn" id="nx"><span>Next</span><span class="pl" aria-hidden="true">+</span></button></div>
+</form><div class="ok" id="ok" role="status" tabindex="-1"><h3>Thank you, we have it.</h3><p class="mu">A designer from Halden will reply within two working days. This is what we received:</p><ul id="sum"></ul></div>
+</div></section>
+</main>
+
+<footer><div class="wrap fg">
+<div><a class="lg" href="#top" style="padding:0">HALDEN</a><p>A lighting design studio in Milan. Via Tortona 28, 20144 Milano. Fictional demo brand.</p></div>
+<div><h4>Studio</h4><a href="#works">Works</a><a href="#services">Services</a><a href="#studio">Note</a></div>
+<div><h4>Work with us</h4><a href="#deliver">Deliverables</a><a href="#inquiry">Inquiry</a></div>
+<div><h4>Contact</h4><a href="#inquiry">New project</a><a href="#inquiry">Milan studio</a></div>
+</div></footer>
+<div class="cr">© 2026 · Designed &amp; developed by Mohamed Yousry · <a href="mailto:wx33693@gmail.com">wx33693@gmail.com</a></div>
+
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)],RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const HL=[["Light that shapes a room.","Halden designs, engineers and commissions architectural light for homes, hotels and galleries across Europe."],["Light that gives a brand its tone.","Retail, showroom and flagship lighting that makes a product look the way its maker meant it to."],["Light that holds a crowd.","Stage, facade and installation lighting for launches, festivals and one-night rooms, rigged and programmed by us."]];
+const PN=[["Casa Orlo","Villa lighting, 14 rooms","Residential","Orlo family","9 months","Lake Como, Italy","conic-gradient(from 200deg at 70% 0%,transparent 0 10%,rgba(239,232,168,.55) 14%,transparent 22%,transparent 100%),radial-gradient(60% 50% at 70% 10%,rgba(239,232,168,.22),transparent)"],["Atelier Neve","Flagship store lighting","Retail","Neve Atelier","5 months","Paris, France","repeating-linear-gradient(90deg,transparent 0 11%,rgba(239,232,168,.3) 11.2%,transparent 11.9%),radial-gradient(90% 60% at 50% 100%,rgba(239,232,168,.2),transparent)"],["Nocturne Hall","Festival stage and facade","Events","Nocturne Festival","11 weeks","Rotterdam, Netherlands","radial-gradient(circle at 50% 120%,transparent 28%,rgba(239,232,168,.35) 29%,transparent 30.5%,transparent 40%,rgba(239,232,168,.2) 41%,transparent 42.5%,transparent 52%,rgba(239,232,168,.12) 53%,transparent 54.5%)"]];
+const SV=[["Spaces","Residential, hospitality and cultural interiors.",[["Concept","A light plan drawn before the furniture is chosen."],["Mock-ups","Full-scale tests on site, at night."],["Controls","Scenes that follow the day, set once."],["Commissioning","We aim every fitting ourselves."]]],["Brands","Retail and product environments.",[["Brand light","A fixed colour and contrast recipe."],["Rollout kit","One spec that works in every store."],["Product focus","Beam angles tested on your real product."],["Audit","Yearly checks across all locations."]]],["Events","Temporary and touring installations.",[["Design","Looks built around the venue’s architecture."],["Programming","Cue lists that your operator can run."],["Rigging plan","Weights, power and safety signed off."],["Show support","A designer on site until doors close."]]]];
+const DL=["Light concept book|Mood, references and a room-by-room intent.","Fixture schedule|Every luminaire, lamp, driver and finish listed.","Drawings|Plans, sections and aiming angles, ready for contractors.","Controls schedule|Scenes, timings and sensor logic.","Site report|Measured lux and colour on the finished room.","Maintenance guide|Lamp life, cleaning and replacement parts."];
+const pn=$('#panels');pn.innerHTML=PN.map((p,i)=>`<article class="pn" aria-label="${p[0]}"><div class="vis" style="background:${p[6]},linear-gradient(180deg,#0a0a09,#141413)"></div><span class="tp">${String(i+1).padStart(2,'0')} / ${String(PN.length).padStart(2,'0')}</span><div class="bx"><h3>${p[0]}</h3><p class="mu">${p[1]}</p><dl class="mt"><div><dt>Service</dt><dd>${p[2]}</dd></div><div><dt>Client</dt><dd>${p[3]}</dd></div><div><dt>Timeline</dt><dd>${p[4]}</dd></div><div><dt>Location</dt><dd>${p[5]}</dd></div></dl></div></article>`).join('');
+$('#svc').innerHTML=SV.map(s=>`<div class="sv rv"><div><h3 style="font-size:clamp(2rem,6vw,3.6rem)">${s[0]}</h3><p class="mu" style="margin-top:.8rem">${s[1]}</p></div><ol>${s[2].map((x,i)=>`<li><b>0${i+1}</b><div><strong>${x[0]}</strong><p>${x[1]}</p></div></li>`).join('')}</ol></div>`).join('');
+$('#dg').innerHTML=DL.map(d=>{const[a,b]=d.split('|');return`<div class="rv"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EFE8A8" stroke-width="1.4" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg><div><strong>${a}</strong><p>${b}</p></div></div>`}).join('');
+/* pills */
+const hl=$('#hl'),hs=$('#hs');$$('.pills button').forEach(b=>b.onclick=()=>{$$('.pills button').forEach(x=>x.setAttribute('aria-pressed',x===b));hl.classList.add('sw');hs.classList.add('sw');setTimeout(()=>{const t=HL[b.dataset.i];hl.textContent=t[0];hs.textContent=t[1];hl.classList.remove('sw');hs.classList.remove('sw')},RM?0:300)});
+/* menu */
+const bg=$('#bg'),mn=$('#menu'),tg=o=>{mn.classList.toggle('open',o);bg.setAttribute('aria-expanded',o);bg.setAttribute('aria-label',o?'Close menu':'Open menu');document.body.style.overflow=o?'hidden':''};
+bg.onclick=()=>tg(!mn.classList.contains('open'));mn.onclick=e=>{if(e.target.closest('a'))tg(false)};addEventListener('keydown',e=>{if(e.key=='Escape')tg(false)});
+/* reveal + active nav + note */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});$$('.rv').forEach(x=>io.observe(x));
+const no=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');no.unobserve(e.target)}}),{rootMargin:'0px 0px -25% 0px'});$$('.nt p').forEach(x=>no.observe(x));
+const ln=$$('#menu a:not(.mo)'),so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)ln.forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')=='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});$$('main [id]').forEach(s=>/^(works|services|deliver|studio|inquiry)$/.test(s.id)&&so.observe(s));
+/* canvas dot grid */
+const cv=$('#cv'),cx=cv.getContext('2d');let W,H,dp,pts=[],mx=-999,my=-999,vis=true,tm=0;
+function rs(){dp=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dp;cv.height=H*dp;cx.setTransform(dp,0,0,dp,0,0);pts=[];const g=W<600?24:30;for(let x=g/2;x<W;x+=g)for(let y=g/2;y<H;y+=g)pts.push([x,y,x,y]);draw(0)}
+function draw(t){cx.clearRect(0,0,W,H);cx.fillStyle='#EFE8A8';const R=150;for(const p of pts){let dx=p[0]-mx,dy=p[1]-my,d=Math.hypot(dx,dy),f=d<R?(1-d/R):0,w=RM?0:Math.sin(p[0]*.012+t*.0007)*Math.cos(p[1]*.012+t*.0005);const tx=p[0]+dx/(d||1)*f*28,ty=p[1]+dy/(d||1)*f*28;p[2]+=(tx-p[2])*.15;p[3]+=(ty-p[3])*.15;const r=.9+f*2.4+w*.35;cx.globalAlpha=.16+f*.8+w*.06;cx.beginPath();cx.arc(p[2],p[3],Math.max(.4,r),0,6.283);cx.fill()}}
+(function l(t){if(vis&&!RM)draw(t);requestAnimationFrame(l)})(0);
+cv.parentElement.addEventListener('pointermove',e=>{const b=cv.getBoundingClientRect();mx=e.clientX-b.left;my=e.clientY-b.top});cv.parentElement.addEventListener('pointerleave',()=>{mx=my=-999});
+new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(cv);addEventListener('resize',rs);rs();
+/* multi-step form */
+const f=$('#f'),ss=$$('.step',f),pg=$('#pg');let c=0;pg.innerHTML=ss.map(()=>'<i></i>').join('');
+const d=new Date();$('[name=date]').min=d.toISOString().slice(0,10);
+function show(){ss.forEach((s,i)=>s.classList.toggle('on',i==c));$$('i',pg).forEach((x,i)=>x.classList.toggle('on',i<=c));$('#sn').innerHTML=`<b>0${c+1}</b> / 0${ss.length}`;$('#st').textContent=ss[c].dataset.t;$('#bk').style.visibility=c?'visible':'hidden';$('#nx').firstChild.textContent=c==ss.length-1?'Send inquiry':'Next'}
+const V=[()=>f.type.value?{}:{type:'Choose one option to continue.'},()=>({name:f.name.value.trim().length<2?'Enter your full name.':'',email:/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(f.email.value.trim())?'':'Enter a valid email, like name@studio.com.'}),()=>f.vision.value.trim().length<20?{vision:'Write at least 20 characters so we can picture it.'}:{},()=>f.budget.value?{}:{budget:'Choose a budget range.'},()=>!f.date.value?{date:'Pick a start date.'}:f.date.value<f.date.min?{date:'Pick today or a later date.'}:{}];
+function chk(){const er=V[c]();$$('.er',ss[c]).forEach(x=>x.textContent='');let bad=0;for(const k in er){if(!er[k])continue;const el=$(`[data-e=${k}]`);el.textContent=er[k];const inp=f.elements[k];(inp.length?inp[0]:inp).setAttribute('aria-invalid','true');if(!bad){bad=1;(inp.length?inp[0]:inp).focus()}}
+if(!bad)$$('[aria-invalid]',ss[c]).forEach(x=>x.removeAttribute('aria-invalid'));return!bad}
+$('#bk').onclick=()=>{if(c){c--;show()}};
+f.onsubmit=e=>{e.preventDefault();if(!chk())return;if(c<ss.length-1){c++;show();ss[c].scrollIntoView({block:'center',behavior:RM?'auto':'smooth'});return}
+const L=[['Project',f.type.value],['Name',f.name.value.trim()],['Email',f.email.value.trim()],['Budget',f.budget.value],['Start',f.date.value]];
+$('#sum').innerHTML=L.map(x=>`<li><span class="mu">${x[0]}</span> &nbsp; ${x[1].replace(/</g,'&lt;')}</li>`).join('');f.style.display='none';const o=$('#ok');o.classList.add('show');o.focus()};
+f.addEventListener('input',e=>{const x=e.target;x.removeAttribute('aria-invalid');const s=$(`[data-e=${x.name}]`);if(s)s.textContent=''});show();
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dockyard: Booking automation for freight forwarders</title>
+<meta name="description" content="Dockyard connects the tools your freight team already pays for and automates quotes, customs paperwork and customer updates.">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0504;--tx:#f6e9e2;--mu:#c9aa9d;--ln:rgba(255,214,196,.16);--cd:rgba(10,3,2,.42);--ac:#ff7a4d;--f:"Hanken Grotesk",system-ui,sans-serif;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}html{scroll-behavior:smooth;scroll-padding-top:80px;background:var(--bg)}
+body{margin:0;font:300 1.05rem/1.65 var(--f);color:var(--tx);background:linear-gradient(180deg,#070707 0,#1a0805 22%,#3a0f07 50%,#6e1a0c 78%,#a32410 100%);overflow-x:hidden;-webkit-text-size-adjust:100%}
+body.ld{overflow:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.11;mix-blend-mode:overlay;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit}button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
+.w{width:min(1080px,100% - 40px);margin-inline:auto}
+section{padding:90px 0;position:relative}
+h1,h2,h3{font-weight:400;letter-spacing:-.035em;line-height:1.02;margin:0}
+h1{font-size:clamp(2.6rem,10vw,5.6rem)}h2{font-size:clamp(2rem,6.6vw,3.7rem);margin-bottom:18px}h3{font-size:1.45rem;letter-spacing:-.02em}
+.lead{color:var(--mu);max-width:52ch;margin:0 0 36px}
+.bf{filter:blur(14px);opacity:.15;transition:filter 1s,opacity 1s}.bf.in{filter:none;opacity:1}
+.tag{display:inline-block;border:1px solid var(--tx);padding:3px 12px;font-size:.9rem;margin-bottom:22px}
+header{position:fixed;inset:0 0 auto;z-index:70;padding-top:env(safe-area-inset-top,0px);background:rgba(18,5,3,.62);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln)}
+.hb{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:64px;width:min(1080px,100% - 32px);margin:auto}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:1.3rem;letter-spacing:-.03em;min-height:44px;font-weight:400}.logo svg{width:28px;height:28px}
+#mb{background:none;border:0;width:56px;height:44px;cursor:pointer;display:grid;align-content:center;gap:7px;justify-items:center}#mb i{display:block;width:34px;height:1px;background:var(--tx);transition:.3s}#mb[aria-expanded=true] i:first-child{transform:translateY(4px) rotate(14deg)}#mb[aria-expanded=true] i:last-child{transform:translateY(-4px) rotate(-14deg)}
+.bk{justify-self:end;text-decoration:underline;text-underline-offset:6px;display:flex;align-items:center;min-height:44px;font-size:1.05rem;white-space:nowrap}
+#ov{position:fixed;inset:0;z-index:65;background:rgba(14,4,3,.97);display:none;flex-direction:column;justify-content:center;padding:90px 28px}#ov.open{display:flex}
+#ov a{font-size:clamp(2rem,9vw,3.6rem);letter-spacing:-.04em;text-decoration:none;padding:8px 0;min-height:56px;border-bottom:1px solid var(--ln);color:var(--mu)}#ov a:hover,#ov a.on{color:var(--tx)}
+#ld{position:fixed;inset:0;z-index:100;background:linear-gradient(180deg,#070707,#1a0805 55%,#a32410);transition:opacity .8s .1s,visibility .9s}#ld.done{opacity:0;visibility:hidden}
+#ld .logo{position:absolute;left:22px;top:calc(22px + env(safe-area-inset-top,0px))}#ld .cb{position:absolute;inset:0;display:grid;place-items:center}#ld .cb svg{width:min(80vw,520px);height:auto}
+#lp{position:absolute;left:22px;bottom:calc(24px + env(safe-area-inset-bottom,0px));font-size:clamp(3.4rem,14vw,6rem);letter-spacing:-.04em;line-height:1}
+#hero{min-height:100svh;display:flex;align-items:center;padding:110px 0 60px;overflow:hidden}
+#hero .w{display:grid;gap:30px}
+.hv{width:min(100%,420px);margin:auto}.hv svg{width:100%;height:auto;overflow:visible}
+.or{fill:none;stroke:rgba(255,214,196,.35);stroke-dasharray:3 7;animation:df 30s linear infinite}@keyframes df{to{stroke-dashoffset:-200}}
+.hp{color:var(--mu);max-width:46ch;margin:22px 0 28px}
+.btn{display:inline-flex;align-items:center;min-height:50px;padding:0 6px;text-decoration:underline;text-underline-offset:7px;font-size:1.1rem;background:none;border:0;cursor:pointer;gap:8px}
+.btn.s{background:var(--tx);color:#1a0805;text-decoration:none;padding:0 26px;font-weight:500;transition:.2s}.btn.s:hover{background:var(--ac)}
+@media(min-width:880px){#hero .w{grid-template-columns:1.2fr .8fr;align-items:center}}
+.cg{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.cc{position:relative;background:var(--cd);border:1px solid var(--ln);padding:26px;display:flex;flex-direction:column;gap:14px}
+.cc::before,.cc::after{content:"";position:absolute;top:-1px;width:14px;height:14px;border-top:2px solid var(--tx)}.cc::before{left:-1px;border-left:2px solid var(--tx)}.cc::after{right:-1px;border-right:2px solid var(--tx)}
+.nb{display:flex;align-items:center}.nb i{width:22px;height:1px;background:var(--tx);position:relative}.nb i::before{content:"";position:absolute;left:0;top:-2px;width:5px;height:5px;background:var(--tx)}.nb b{font-weight:400;font-size:.95rem;border:1px solid var(--tx);padding:1px 7px}
+.cc p{margin:0;color:var(--mu)}.dg{width:100%;height:auto;margin-top:auto}.dg *{vector-effect:non-scaling-stroke}
+.sl{border-top:1px solid var(--ln)}.sr{display:grid;gap:10px;padding:28px 0;border-bottom:1px solid var(--ln);transition:background .3s}.sr:hover{background:rgba(255,160,120,.05)}
+.sr p{margin:0;color:var(--mu);max-width:56ch}
+@media(min-width:800px){.sr{grid-template-columns:90px 1fr 1.2fr auto;gap:30px;align-items:start;padding:30px 12px}}
+.orb{width:min(100%,520px);margin:0 auto 40px;display:block}.orb text{fill:var(--tx);font:300 11px var(--f)}
+.oc{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}.oc .cc svg{width:34px;height:34px;stroke:var(--tx);fill:none;stroke-width:1.2}
+.pt{position:relative;display:grid;gap:0;padding-left:28px}.pt::before{content:"";position:absolute;left:5px;top:0;bottom:0;width:1px;background:var(--ln)}
+.ps{position:relative;padding:0 0 54px;opacity:.4;transition:opacity .5s}.ps.on{opacity:1}.ps::before{content:"";position:absolute;left:-28px;top:14px;width:11px;height:11px;border:1px solid var(--tx);background:#1a0805;transition:.4s}.ps.on::before{background:var(--ac);border-color:var(--ac)}
+.ps big{display:block;font-size:clamp(3.4rem,13vw,6.5rem);letter-spacing:-.05em;line-height:1;font-weight:300}.ps p{margin:12px 0 0;color:var(--mu);max-width:48ch}
+.fm{display:grid;gap:16px;max-width:620px}label{display:grid;gap:6px;font-size:.95rem}label span.t{color:var(--mu)}
+input,select{width:100%;min-height:52px;padding:0 14px;background:rgba(10,3,2,.55);border:1px solid var(--ln);border-radius:0}select option{background:#1a0805}input:focus,select:focus{border-color:var(--tx);outline:0}
+.er{color:#ffb08f;font-size:.85rem;min-height:1.1em}[aria-invalid=true]{border-color:#ffb08f}
+.ok{max-width:620px;border:1px solid var(--tx);padding:26px;background:var(--cd)}
+footer{border-top:1px solid var(--ln);padding:46px 0 26px;background:rgba(8,2,1,.55)}.fg{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+footer h4{font-weight:400;font-size:.9rem;color:var(--mu);margin:0 0 8px}footer a{display:block;text-decoration:none;padding:6px 0;min-height:36px}footer a:hover{text-decoration:underline}footer p{color:var(--mu);margin:8px 0 0;font-size:.95rem}
+.cr{background:#050202;border-top:1px solid var(--ln);padding:16px 0 calc(16px + env(safe-area-inset-bottom,0px));font-size:.85rem;color:var(--mu)}.cr .w{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:space-between}.cr a{color:var(--tx)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}.bf{filter:none;opacity:1}}
+</style>
+</head>
+<body class="ld">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#f6e9e2" stroke-width="1"/></marker></defs>
+<symbol id="cube" viewBox="0 0 200 200"><g fill="rgba(255,225,210,.1)" stroke="#f6e9e2" stroke-width="1.2" stroke-linejoin="round"><path d="M100 70L132 88L100 106L68 88Z"/><path d="M68 88L100 106V144L68 126Z"/><path d="M100 106L132 88V126L100 144Z"/></g><path d="M100 106V88M100 106L68 88M100 106L132 88" stroke="#f6e9e2" stroke-dasharray="3 3" stroke-width=".8" fill="none"/></symbol>
+<symbol id="dm" viewBox="0 0 24 24"><path d="M12 2L22 12L12 22L2 12Z" fill="none" stroke="#f6e9e2" stroke-width="1.4"/><path d="M12 7L17 12L12 17L7 12Z" fill="none" stroke="#f6e9e2" stroke-width="1.4"/></symbol></svg>
+<div id="ld" role="status" aria-label="Loading"><a class="logo" href="#top" tabindex="-1"><svg><use href="#dm"/></svg>Dockyard®</a>
+<div class="cb"><svg viewBox="0 0 400 400" aria-hidden="true"><g stroke="rgba(246,233,226,.4)" stroke-width="1" fill="none" marker-end="url(#ar)"><path d="M200 200V10"/><path d="M200 200V390"/><path d="M200 200H10"/><path d="M200 200H390"/><path d="M200 200L330 60"/><path d="M200 200L70 340"/><path d="M200 200L340 300"/><path d="M200 200L50 90"/></g><use href="#cube" x="100" y="100" width="200" height="200"/></svg></div>
+<div id="lp">000%</div></div>
+<header><div class="hb"><a class="logo" href="#top"><svg><use href="#dm"/></svg>Dockyard®</a>
+<button id="mb" aria-expanded="false" aria-controls="ov" aria-label="Open menu"><i></i><i></i></button>
+<a class="bk" href="#book">Book a call&nbsp;↗</a></div></header>
+<nav id="ov" aria-label="Main"><a href="#problem">The problem</a><a href="#solutions">Solutions</a><a href="#process">Process</a><a href="#build">What we build</a><a href="#book">Book a call</a></nav>
+<main id="top">
+<section id="hero"><div class="w"><div><h1 class="bf">Fewer emails. More containers moving.</h1>
+<p class="hp bf">Dockyard connects the tools your freight team already pays for, then automates quotes, customs paperwork and customer updates around them.</p>
+<a class="btn s" href="#book">Book a call&nbsp;↗</a> <a class="btn" href="#problem">See the problem</a></div>
+<div class="hv"><svg viewBox="0 0 400 400" role="img" aria-label="A cube at the centre of orbiting tools"><ellipse class="or" cx="200" cy="200" rx="190" ry="70" transform="rotate(-20 200 200)"/><ellipse class="or" cx="200" cy="200" rx="150" ry="150"/><ellipse class="or" cx="200" cy="200" rx="190" ry="70" transform="rotate(35 200 200)"/><g stroke="rgba(246,233,226,.45)" fill="none" marker-end="url(#ar)"><path d="M200 200V20"/><path d="M200 200L340 90"/><path d="M200 200L80 320"/><path d="M200 200L350 310"/></g><use href="#cube" x="60" y="60" width="280" height="280"/></svg></div></div></section>
+
+<section id="problem"><div class="w"><span class="tag bf">The problem</span>
+<h2 class="bf">The gap between a quote request and a booked shipment</h2><p class="lead bf">Every step works on its own. Nothing works together.</p>
+<div class="cg" id="pg"></div></div></section>
+
+<section id="solutions"><div class="w"><span class="tag bf">Solutions</span>
+<h2 class="bf">One system. Doing the booking for you.</h2>
+<svg class="orb" id="ob" viewBox="0 0 400 300" role="img" aria-label="Your tools connected around one hub"></svg>
+<div class="sl" id="sl"></div></div></section>
+
+<section id="outcomes"><div class="w"><span class="tag bf">Outcomes</span><h2 class="bf">What you actually get back</h2><p class="lead bf">Time, revenue and a team that works the same way every shift.</p>
+<div class="oc" id="oc"></div></div></section>
+
+<section id="process"><div class="w"><span class="tag bf">Process</span><h2 class="bf">From call to running system</h2><p class="lead bf">Five steps. You see working software after the third.</p>
+<div class="pt" id="pt"></div></div></section>
+
+<section id="build"><div class="w"><span class="tag bf">What we build</span><h2 class="bf">Built around how you ship</h2>
+<div class="cg" id="bd"></div></div></section>
+
+<section id="book"><div class="w"><span class="tag bf">Book a call</span><h2 class="bf">Stop losing shipments to slower quotes</h2><p class="lead bf">Tell us where it hurts. We reply within one working day with two time slots for a 30 minute call.</p>
+<form class="fm" id="fm" novalidate>
+<label><span class="t">Name</span><input name="n" autocomplete="name"><span class="er" data-e="n"></span></label>
+<label><span class="t">Work email</span><input name="e" type="email" autocomplete="email"><span class="er" data-e="e"></span></label>
+<label><span class="t">Company</span><input name="c" autocomplete="organization"><span class="er" data-e="c"></span></label>
+<label><span class="t">Team size</span><select name="s"><option value="">Choose one</option><option>1 to 10 people</option><option>11 to 50 people</option><option>51 or more</option></select><span class="er" data-e="s"></span></label>
+<label><span class="t">Biggest headache</span><select name="h"><option value="">Choose one</option><option>Slow quotes</option><option>Customs paperwork</option><option>Tracking updates to customers</option><option>Tools that don’t talk</option></select><span class="er" data-e="h"></span></label>
+<label><span class="t">Preferred day for the call</span><input name="d" type="date"><span class="er" data-e="d"></span></label>
+<button class="btn s" type="submit" style="justify-self:start">Book a call&nbsp;↗</button></form>
+<div class="ok" id="ok" role="status" hidden><h3>Call requested.</h3><p style="margin:10px 0 0;color:var(--mu)">Thanks, <b id="on" style="font-weight:500"></b>. We will email <b id="oe" style="font-weight:500"></b> within one working day with two slots around <b id="od" style="font-weight:500"></b>.</p></div></div></section>
+</main>
+<footer><div class="w fg"><div><a class="logo" href="#top"><svg><use href="#dm"/></svg>Dockyard®</a><p>Booking and paperwork automation for freight forwarders.</p></div>
+<div><h4>Navigate</h4><a href="#problem">The problem</a><a href="#solutions">Solutions</a><a href="#process">Process</a><a href="#book">Book a call</a></div>
+<div><h4>Contact</h4><a href="#book">hello@dockyard.example</a><p>Replies within one working day</p></div></div></footer>
+<div class="cr"><div class="w"><span>© 2026 · Designed &amp; developed by Mohamed Yousry</span><a href="mailto:wx33693@gmail.com">wx33693@gmail.com</a></div></div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const nb=n=>`<div class="nb"><i></i><b>${n}</b></div>`,st='stroke="#f6e9e2" stroke-width="1" fill="none"';
+const BX=(x,y,t)=>`<rect x="${x}" y="${y}" width="62" height="34" ${st}/><text x="${x+31}" y="${y+21}" text-anchor="middle" fill="#f6e9e2" font-size="11" font-family="Hanken Grotesk">${t}</text>`;
+const PR=[["Same shipment, three systems","Nobody’s software talks to each other, so someone retypes the same booking details three times.",`<svg class="dg" viewBox="0 0 300 110" aria-hidden="true">${BX(10,38,"TMS")}${BX(119,38,"Customs")}${BX(228,38,"Email")}<path d="M72 55H119M181 55H228" ${st} stroke-dasharray="3 4"/><path d="M90 47l10 16M100 47l-10 16M199 47l10 16M209 47l-10 16" stroke="#ff7a4d" fill="none"/></svg>`],
+["Customs paperwork eats the day","Every consignment needs the same documents in a slightly different format, and every one is checked by hand.",`<svg class="dg" viewBox="0 0 300 110" aria-hidden="true"><rect x="70" y="20" width="70" height="80" ${st}/><rect x="82" y="12" width="70" height="80" ${st}/><rect x="94" y="4" width="70" height="80" ${st} fill="rgba(10,3,2,.7)"/><path d="M106 24h46M106 36h46M106 48h30" ${st}/><path d="M200 70l22-38l22 38Z" stroke="#ff7a4d" fill="none"/><path d="M222 46v10M222 62v1" stroke="#ff7a4d"/></svg>`],
+["Quotes that go cold","A shipper asks for a rate, waits two days and books with whoever answered first.",`<svg class="dg" viewBox="0 0 300 110" aria-hidden="true"><circle cx="40" cy="55" r="20" ${st}/><circle cx="260" cy="55" r="20" ${st} stroke-dasharray="3 3"/><path d="M60 55H240" ${st} stroke-dasharray="3 5"/><circle cx="150" cy="55" r="22" fill="rgba(10,3,2,.8)" stroke="#ff7a4d"/><path d="M150 42v14l9 6" stroke="#ff7a4d" fill="none"/><text x="150" y="100" text-anchor="middle" fill="#f6e9e2" font-size="11" font-family="Hanken Grotesk">No reply</text></svg>`]];
+$("#pg").innerHTML=PR.map((p,i)=>`<article class="cc">${nb("0"+(i+1))}<h3 class="bf">${p[0]}</h3><p class="bf">${p[1]}</p>${p[2]}</article>`).join("");
+const SO=[["Set up right","We audit the software you already run and fix what is misconfigured before we add anything new."],["One system, not four","Your TMS, customs tool, e-signature and inbox share one record, so a booking is entered once."],["Automation under control","Where AI helps, it drafts and you approve. We document exactly which data it can and cannot touch."],["Quotes that move","A rate request gets a reply in minutes, with the right carrier options, and a follow-up if it goes quiet."],["Updates on autopilot","Customers get status messages and document requests automatically, from the data you already hold."]];
+$("#sl").innerHTML=SO.map((s,i)=>`<article class="sr">${nb("0"+(i+1))}<h3 class="bf">${s[0]}</h3><p class="bf">${s[1]}</p><a class="btn" href="#book">Book a call&nbsp;↗</a></article>`).join("");
+const TL=["TMS","Customs","E-sign","Billing","Inbox","Carriers","Tracking"];
+$("#ob").innerHTML=`<ellipse class="or" cx="200" cy="150" rx="170" ry="120"/><use href="#cube" x="140" y="90" width="120" height="120"/>`+TL.map((t,i)=>{const a=i/TL.length*Math.PI*2-Math.PI/2,x=200+Math.cos(a)*170,y=150+Math.sin(a)*120;return`<path d="M200 150L${x} ${y}" stroke="rgba(246,233,226,.3)" fill="none"/><circle cx="${x}" cy="${y}" r="4" fill="#ff7a4d"/><text x="${x}" y="${y+(y<150?-12:20)}" text-anchor="middle">${t}</text>`}).join("");
+const IC=[["M12 6v6l4 2M12 3a9 9 0 100 18 9 9 0 000-18","More time, less typing","Your most expensive people stop doing your cheapest work."],["M4 18l5-6 4 3 7-9M16 6h4v4","Faster quotes, more wins","A reply in minutes beats a better rate in two days."],["M8 8a4 4 0 118 0c0 3-4 3-4 7M12 19v1","Nothing lives in one head","Every rule runs in the background and can be read by anyone."],["M5 12a7 7 0 0112-5M19 12a7 7 0 01-12 5M17 3v4h-4M7 21v-4h4","Same result every shift","A process that repeats is a process you can trust."]];
+$("#oc").innerHTML=IC.map(c=>`<article class="cc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${c[0]}"/></svg><h3 class="bf">${c[1]}</h3><p class="bf">${c[2]}</p></article>`).join("");
+const PS=[["Discovery call","We map how a booking moves through your team today, which tools you use and who owns each step."],["The priority","We show what is worth building first, flag the quick wins and tell you what to leave alone."],["The build","We build and test in a sandbox with your real examples, then demo it and take your notes."],["The handover","Every tool, rule and permission is documented and handed to your team, with training."],["The result","Clean, tracked data so you can see each automation working and what it saved."]];
+$("#pt").innerHTML=PS.map((p,i)=>`<article class="ps"><big>0${i+1}</big>${nb(p[0]).replace("<b>"+p[0],"<b>"+p[0])}<p>${p[1]}</p></article>`).join("").replace(/<div class="nb"><i><\/i><b>/g,'<div class="nb" style="margin-top:12px"><i></i><b>');
+const BD=[["Built around you","We map how your team really works, then build around that instead of a template that almost fits."],["Your TMS, actually working","We fix the system you already pay for so every booking, document and follow-up lives in one place."],["Quotes that convert","Each rate request gets a quick reply and the right follow-up, on time, every time."],["Yours, forever","Everything runs in your own accounts, fully documented. No lock-in and no black box."]];
+$("#bd").innerHTML=BD.map(b=>`<article class="cc"><h3 class="bf">${b[0]}</h3><p class="bf">${b[1]}</p></article>`).join("");
+// loader
+const ld=$("#ld"),lp=$("#lp");let n=0;const fin=()=>{ld.classList.add("done");document.body.classList.remove("ld");setTimeout(()=>$$("#hero .bf").forEach(x=>x.classList.add("in")),250)};
+if(matchMedia("(prefers-reduced-motion:reduce)").matches){fin()}else{const t=setInterval(()=>{n=Math.min(100,n+1+Math.floor(Math.random()*4));lp.textContent=String(n).padStart(3,"0")+"%";if(n>=100){clearInterval(t);setTimeout(fin,350)}},28)}
+// reveals + nav state
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");ro.unobserve(e.target)}}),{threshold:.3});$$(".bf").forEach(x=>{if(!x.closest("#hero"))ro.observe(x)});
+const po=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle("on",e.isIntersecting)),{rootMargin:"-40% 0px -40% 0px"});$$(".ps").forEach(x=>po.observe(x));
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)$$("#ov a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")=="#"+e.target.id))}),{rootMargin:"-45% 0px -50% 0px"});$$("main section[id]").forEach(s=>so.observe(s));
+// menu
+const mb=$("#mb"),ov=$("#ov"),tg=o=>{ov.classList.toggle("open",o);mb.setAttribute("aria-expanded",o);mb.setAttribute("aria-label",o?"Close menu":"Open menu")};
+mb.onclick=()=>tg(!ov.classList.contains("open"));ov.onclick=e=>e.target.closest("a")&&tg(false);document.addEventListener("keydown",e=>e.key=="Escape"&&tg(false));
+// form
+const fm=$("#fm"),td=new Date().toISOString().slice(0,10);fm.elements.d.min=td;
+const VL={n:v=>v.trim().length>1||"Enter your name.",e:v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)||"Enter a valid work email, like name@company.com.",c:v=>v.trim().length>1||"Enter your company name.",s:v=>!!v||"Choose your team size.",h:v=>!!v||"Choose your biggest headache.",d:v=>(v&&v>=td)||"Pick a day from today onward."};
+fm.onsubmit=e=>{e.preventDefault();let bad=null;for(const k in VL){const f=fm.elements[k],r=VL[k](f.value);fm.querySelector(`[data-e=${k}]`).textContent=r===true?"":r;f.setAttribute("aria-invalid",r!==true);if(r!==true&&!bad)bad=f}
+if(bad)return bad.focus();$("#on").textContent=fm.elements.n.value.trim();$("#oe").textContent=fm.elements.e.value;$("#od").textContent=new Date(fm.elements.d.value+"T00:00").toLocaleDateString("en-GB",{day:"numeric",month:"long"});fm.hidden=true;$("#ok").hidden=false;$("#ok").scrollIntoView({block:"center"})};
+</script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pulsely – Product analytics that answers back</title>
+<meta name="description" content="Pulsely is cookieless product analytics. See live activity, funnels and retention in one calm dashboard.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070A12;--s:#0E1424;--s2:#151C32;--v:#6D5EF5;--c:#22D3EE;--t:#E8ECF8;--m:#8d97b5;--l:rgba(232,236,248,.1);--g:linear-gradient(120deg,#6D5EF5,#22D3EE);--sans:Sora,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px));background:var(--bg)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--t);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+svg,img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--c);outline-offset:3px}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+section{padding:clamp(60px,9vw,120px) 0}
+h2{font-size:clamp(1.9rem,5.2vw,3.2rem);line-height:1.1;letter-spacing:-.035em;font-weight:600;margin:0}
+.sub{color:var(--m);max-width:54ch;margin:14px 0 0}
+.mono{font-family:var(--mono)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:12px;border:1px solid transparent;font-weight:500;text-decoration:none;background:var(--g);color:#06080f;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(109,94,245,.4)}
+.btn.ghost{background:transparent;color:var(--t);border-color:var(--l)}
+.btn.ghost:hover{border-color:var(--c);box-shadow:none}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:rgba(7,10,18,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--l)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.25rem;text-decoration:none;letter-spacing:-.03em}
+.logo svg{width:28px;height:28px}
+nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+nav a{text-decoration:none;color:var(--m);font-size:.93rem;padding:6px 0;transition:color .2s}
+nav a:hover,nav a.on{color:var(--t)}
+.na{display:flex;gap:10px;align-items:center}
+.mb{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--l);background:none;place-items:center}
+.mb svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.8;fill:none}
+@media(max-width:860px){
+.mb{display:grid}.na .btn{display:none}
+nav{position:fixed;inset:calc(68px + env(safe-area-inset-top,0px)) 0 auto 0;background:var(--s);border-bottom:1px solid var(--l);padding:8px 20px 22px;transform:translateY(-130%);visibility:hidden;transition:transform .3s;z-index:-1}
+nav.open{transform:none;visibility:visible}
+nav ul{flex-direction:column;gap:0}
+nav a{display:block;padding:15px 0;font-size:1.1rem;border-bottom:1px solid var(--l)}
+}
+.hero{position:relative;padding:clamp(44px,7vw,90px) 0 clamp(40px,6vw,80px);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto;height:70%;background:radial-gradient(50% 60% at 30% 20%,rgba(109,94,245,.35),transparent 70%),radial-gradient(40% 50% at 80% 10%,rgba(34,211,238,.2),transparent 70%);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(30px,5vw,64px);align-items:center}
+.hero h1{font-size:clamp(2.5rem,7.4vw,4.9rem);line-height:1.02;letter-spacing:-.05em;font-weight:700;margin:0}
+.hero h1 span{display:block;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--m);font-size:1.1rem;max-width:46ch;margin:22px 0 30px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.note{margin-top:16px;color:var(--m);font-size:.85rem}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr}}
+.dash{background:linear-gradient(180deg,var(--s2),var(--s));border:1px solid var(--l);border-radius:18px;box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 0 1px rgba(109,94,245,.12);overflow:hidden}
+.dtop{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--l);font-family:var(--mono);font-size:.78rem;color:var(--m)}
+.dtop i{width:10px;height:10px;border-radius:50%;background:var(--l)}
+.dtop span{margin-left:8px}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--l)}
+.kp div{padding:16px 16px 14px;border-left:1px solid var(--l)}
+.kp div:first-child{border-left:0}
+.kp small{display:block;color:var(--m);font-size:.78rem}
+.kp b{font-family:var(--mono);font-weight:500;font-size:clamp(1.15rem,3.4vw,1.7rem);letter-spacing:-.03em}
+.kp em{font-style:normal;font-family:var(--mono);font-size:.76rem;color:#4ade80;margin-left:6px}
+.live::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#4ade80;margin-right:8px;animation:pl 1.6s infinite}
+@keyframes pl{50%{opacity:.3}}
+.ch{padding:14px 10px 4px}
+.ch svg{width:100%;height:auto}
+.ln{fill:none;stroke:url(#lg);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:dr 1.8s .3s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+.pg{padding:6px 16px 16px;display:grid;gap:10px}
+.pg div{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:.85rem}
+.pg span{font-family:var(--mono);color:var(--m)}
+.pg i{grid-column:1/-1;height:4px;border-radius:4px;background:var(--l);position:relative;overflow:hidden}
+.pg i::after{content:"";position:absolute;inset:0;width:var(--w);background:var(--g);border-radius:4px;transition:width 1s}
+.tr{padding:24px 0;border-block:1px solid var(--l);background:var(--s)}
+.tr .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px 34px;flex-wrap:wrap}
+.tr p{margin:0;color:var(--m);font-size:.9rem}
+.tr b{font-weight:600;font-size:1.2rem;color:rgba(232,236,248,.5);letter-spacing:-.03em}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:40px}
+.bx{position:relative;overflow:hidden;background:var(--s);border:1px solid var(--l);border-radius:18px;padding:24px;transition:border-color .25s}
+.bx:hover{border-color:rgba(109,94,245,.6)}
+.bx h3{margin:0 0 6px;font-size:1.2rem;font-weight:600;letter-spacing:-.02em}
+.bx p{margin:0;color:var(--m);font-size:.93rem;max-width:40ch}
+.s4{grid-column:span 4}.s2{grid-column:span 2}
+@media(max-width:900px){.s4,.s2{grid-column:span 6}}
+@media(min-width:620px) and (max-width:900px){.s2{grid-column:span 3}}
+.ev{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:6px;font-family:var(--mono);font-size:.8rem;height:176px;overflow:hidden}
+.ev li{display:flex;justify-content:space-between;gap:10px;padding:8px 12px;background:var(--s2);border-radius:8px;animation:in .5s}
+.ev li span{color:var(--c)}.ev li small{color:var(--m)}
+@keyframes in{from{opacity:0;transform:translateY(-10px)}}
+.fn{margin-top:18px;display:grid;gap:8px}
+.fn div{height:30px;border-radius:8px;background:var(--g);display:flex;align-items:center;padding:0 10px;font-size:.78rem;font-family:var(--mono);color:#06080f;font-weight:500;opacity:var(--o)}
+.hm{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:18px}
+.hm i{aspect-ratio:1;border-radius:5px;background:var(--v);opacity:var(--o)}
+.al{margin-top:16px;display:grid;gap:8px;font-size:.84rem}
+.al div{display:flex;gap:10px;align-items:center;padding:9px 12px;background:var(--s2);border-radius:8px}
+.al i{width:8px;height:8px;border-radius:50%;flex:none}
+.al small{margin-left:auto;color:var(--m);font-family:var(--mono)}
+.pv{display:flex;flex-direction:column;justify-content:flex-end;min-height:230px}
+.pv .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.22;filter:saturate(.5)}
+.pv>*{position:relative}
+.pv strong{font-size:3.6rem;font-weight:700;letter-spacing:-.05em;line-height:1;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.st{padding:26px;background:var(--s);border:1px solid var(--l);border-radius:18px}
+.st .n{font-family:var(--mono);color:var(--c);font-size:.85rem}
+.st h3{margin:10px 0 8px;font-size:1.3rem;font-weight:600}
+.st p{margin:0;color:var(--m);font-size:.95rem}
+@media(max-width:860px){.steps{grid-template-columns:minmax(0,1fr)}}.st{min-width:0}.code{min-width:0}.code code{min-width:0;overflow-wrap:anywhere;word-break:break-all}
+.code{margin-top:16px;background:#04060c;border:1px solid var(--l);border-radius:10px;padding:12px 14px;font-family:var(--mono);font-size:.76rem;color:var(--c);display:flex;gap:10px;align-items:center;justify-content:space-between}
+.code code{overflow:auto;white-space:nowrap;scrollbar-width:none}
+.code button{flex:none;min-height:36px;padding:0 12px;border-radius:8px;border:1px solid var(--l);background:var(--s2);font-size:.76rem}
+.code button:hover{border-color:var(--c)}
+.tg{display:inline-flex;align-items:center;gap:12px;margin-top:26px;padding:6px;border:1px solid var(--l);border-radius:40px;background:var(--s)}
+.tg span{padding:8px 16px;border-radius:30px;font-size:.9rem;color:var(--m);cursor:pointer;min-height:40px;display:flex;align-items:center}
+.tg span.on{background:var(--s2);color:var(--t)}
+.tg b{font-weight:500;color:#4ade80;font-size:.78rem;margin-left:6px}
+.tg button{display:none}
+.pl{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px;align-items:stretch}
+.pc{position:relative;padding:28px;background:var(--s);border:1px solid var(--l);border-radius:18px;display:flex;flex-direction:column}
+.pc.hot{background:linear-gradient(180deg,#1a1f45,var(--s));border-color:rgba(109,94,245,.7);box-shadow:0 20px 60px rgba(109,94,245,.25)}
+.pc h3{margin:0;font-size:1.2rem;font-weight:600}
+.tag{position:absolute;top:-13px;right:22px;background:var(--g);color:#06080f;font-size:.78rem;font-weight:600;padding:4px 12px;border-radius:20px}
+.pr{margin:18px 0 4px;font-size:3rem;font-weight:700;letter-spacing:-.05em;line-height:1}
+.pr small{font-size:1rem;font-weight:400;color:var(--m);letter-spacing:0}
+.bl{color:var(--m);font-size:.85rem;min-height:1.4em;margin:0 0 20px}
+.pc ul{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:10px;font-size:.93rem}
+.pc li{display:flex;gap:10px}
+.pc li::before{content:"✓";color:var(--c)}
+.pc .btn{margin-top:auto}
+@media(max-width:900px){.pl{grid-template-columns:1fr}}
+.rv3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+blockquote{margin:0;padding:26px;background:var(--s);border:1px solid var(--l);border-radius:18px;display:flex;flex-direction:column;gap:22px;justify-content:space-between}
+blockquote p{margin:0;font-size:1.05rem;line-height:1.55}
+.who{display:flex;align-items:center;gap:12px;font-size:.9rem}
+.who b{display:block;font-weight:500}
+.who span{color:var(--m)}
+.av{width:46px;height:46px;border-radius:50%;overflow:hidden;background:var(--s2);display:grid;place-items:center;flex:none;font-weight:600}
+.av .ph{width:100%;height:100%;object-fit:cover}
+@media(max-width:860px){.rv3{grid-template-columns:1fr}}
+.faq{max-width:800px;margin-top:30px}
+details{border-bottom:1px solid var(--l)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-size:1.1rem;font-weight:500;min-height:44px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--c);font-size:1.5rem;transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:0 0 22px;color:var(--m);max-width:64ch}
+.fin{text-align:center;position:relative;overflow:hidden;border:1px solid var(--l);border-radius:26px;padding:clamp(40px,7vw,80px) 22px;background:radial-gradient(60% 90% at 50% 0,rgba(109,94,245,.35),transparent 70%),var(--s)}
+.fin .sub{margin-inline:auto}
+.fin form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:28px auto 0;max-width:540px}
+.fin input{flex:1 1 250px;font:inherit;color:var(--t);background:var(--bg);border:1px solid var(--l);border-radius:12px;min-height:50px;padding:0 16px}
+.fin input:focus{border-color:var(--c);outline:0}
+.msg{min-height:1.5em;margin-top:12px;font-size:.92rem;color:#4ade80}
+.msg.err{color:#ff8f8f}
+footer.main{border-top:1px solid var(--l);padding:56px 0 30px;margin-top:clamp(40px,6vw,80px)}
+.fg{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:30px}
+@media(max-width:700px){.fg{grid-template-columns:1fr 1fr}.fg>div:first-child{grid-column:1/-1}}
+.fg h4{margin:0 0 10px;font-weight:600;font-size:.95rem}
+.fg a{display:block;color:var(--m);text-decoration:none;padding:5px 0;font-size:.92rem}
+.fg a:hover{color:var(--c)}
+.fg p{color:var(--m);max-width:34ch;font-size:.92rem}
+.soc{display:flex;gap:8px;margin-top:14px}
+.fg .soc a{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--l);border-radius:12px;padding:0}
+.soc svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.credit{background:#04060c;border-top:1px solid var(--l);text-align:center;padding:16px 20px;font-size:.82rem;color:var(--m)}
+.credit a{color:var(--c);text-decoration:none}
+.credit a:hover{text-decoration:underline}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.ln{stroke-dashoffset:0}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap nav">
+<a class="logo" href="#top" aria-label="Pulsely home"><svg viewBox="0 0 32 32"><defs><linearGradient id="lgo" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6D5EF5"/><stop offset="1" stop-color="#22D3EE"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="url(#lgo)"/><path d="M5 17h5l3-8 5 15 3-9h6" fill="none" stroke="#06080f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Pulsely</a>
+<nav id="nav" aria-label="Main"><ul><li><a href="#features">Features</a></li><li><a href="#how">How it works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
+<div class="na"><a class="btn" href="#start">Start free</a><button class="mb" id="mb" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></svg></button></div>
+</div>
+</header>
+
+<main id="top">
+<section class="hero">
+<div class="wrap">
+<div>
+<h1>See what your product <span>is really doing.</span></h1>
+<p>Pulsely turns raw events into live answers: who is here, where they drop off and what brings them back. No cookies, no consent banners, no data team required.</p>
+<div class="cta"><a class="btn" href="#start">Start 14-day trial</a><a class="btn ghost" href="#features">See how it works</a></div>
+<div class="note">No credit card needed. Set up in under five minutes.</div>
+</div>
+<div class="dash" role="img" aria-label="Live Pulsely dashboard showing visitors, revenue and top pages">
+<div class="dtop"><i></i><i></i><i></i><span>pulsely.app / overview</span></div>
+<div class="kp"><div><small class="live">Visitors now</small><b id="k1">1,284</b></div><div><small>Revenue today</small><b id="k2">$8,420</b></div><div><small>Conversion</small><b id="k3">4.2%</b><em id="k3d">+0.3</em></div></div>
+<div class="ch"><svg viewBox="0 0 600 200" preserveAspectRatio="none"><defs><linearGradient id="lg" x1="0" x2="1"><stop stop-color="#6D5EF5"/><stop offset="1" stop-color="#22D3EE"/></linearGradient><linearGradient id="ag" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#6D5EF5" stop-opacity=".35"/><stop offset="1" stop-color="#6D5EF5" stop-opacity="0"/></linearGradient></defs><g stroke="rgba(232,236,248,.07)"><path d="M0 50H600M0 100H600M0 150H600"/></g><path id="ar" fill="url(#ag)"/><path id="ln" class="ln" pathLength="1"/><circle id="dt" r="5" fill="#22D3EE" stroke="#070A12" stroke-width="3"/></svg></div>
+<div class="pg" id="pg"></div>
+</div>
+</div>
+</section>
+
+<div class="tr"><div class="wrap"><p>Trusted by product teams at</p><b>Northwind</b><b>Lattice&amp;Co</b><b>Fieldnote</b><b>Orbit Labs</b><b>Kestrel</b></div></div>
+
+<section id="features">
+<div class="wrap">
+<h2>Everything you need to read your product, in one calm view</h2>
+<p class="sub">Six tools that work from the same stream of events, so numbers always agree.</p>
+<div class="bento">
+<div class="bx s4 rv"><h3>Live event stream</h3><p>Watch real activity as it happens and click any event to see the visitor’s full journey.</p><ul class="ev" id="ev" aria-live="off"></ul></div>
+<div class="bx s2 pv rv"><div id="pvi"></div><strong>0</strong><h3 style="margin-top:8px">cookies, ever</h3><p>Privacy-first by design. No banners, no consent headaches.</p></div>
+<div class="bx s2 rv"><h3>Funnels</h3><p>Find the exact step where people leave.</p><div class="fn"><div style="width:100%;--o:1">Visit · 12,400</div><div style="width:68%;--o:.85">Sign up · 8,430</div><div style="width:41%;--o:.7">Activate · 5,080</div><div style="width:24%;--o:.55">Pay · 2,980</div></div></div>
+<div class="bx s2 rv"><h3>Retention</h3><p>See which cohorts stick around.</p><div class="hm" id="hm" aria-hidden="true"></div></div>
+<div class="bx s2 rv"><h3>Smart alerts</h3><p>Get told when something moves.</p><div class="al"><div><i style="background:#f87171"></i>Signups down 18%<small>2m</small></div><div><i style="background:#4ade80"></i>Checkout up 9%<small>1h</small></div><div><i style="background:#fbbf24"></i>Slow page: /pricing<small>3h</small></div></div></div>
+</div>
+</div>
+</section>
+
+<section id="how" style="background:var(--s);border-block:1px solid var(--l)">
+<div class="wrap">
+<h2>Live in three steps</h2>
+<div class="steps">
+<div class="st rv"><span class="n">Step 1</span><h3>Add one snippet</h3><p>Paste a single line before your closing head tag. It weighs under 2 KB.</p><div class="code"><code id="cd">&lt;script defer src="https://cdn.pulsely.app/p.js"&gt;&lt;/script&gt;</code><button id="cp" type="button">Copy</button></div></div>
+<div class="st rv"><span class="n">Step 2</span><h3>Pick what matters</h3><p>Page views are tracked automatically. Name the actions that count: signups, purchases, invites.</p></div>
+<div class="st rv"><span class="n">Step 3</span><h3>Read the answers</h3><p>Open your dashboard, ask a question in plain English and share the result with your team.</p></div>
+</div>
+</div>
+</section>
+
+<section id="pricing">
+<div class="wrap">
+<h2>Simple pricing that grows with you</h2>
+<p class="sub">Every plan includes unlimited team members and a 14-day free trial.</p>
+<div class="tg" role="group" aria-label="Billing period"><span id="bm" class="on" role="button" tabindex="0">Monthly</span><span id="by" role="button" tabindex="0">Yearly <b>Save 20%</b></span></div>
+<div class="pl" id="pl"></div>
+</div>
+</section>
+
+<section style="background:var(--s);border-block:1px solid var(--l)">
+<div class="wrap">
+<h2>Teams that stopped guessing</h2>
+<div class="rv3" id="rv3"></div>
+</div>
+</section>
+
+<section id="faq">
+<div class="wrap">
+<h2>Questions, answered</h2>
+<div class="faq">
+<details><summary>Do I need a cookie banner?</summary><p>No. Pulsely does not use cookies or store personal data, so in most regions you can skip the banner.</p></details>
+<details><summary>What counts as an event?</summary><p>Any page view or action you track. Plans are based on events per month, and we warn you before you reach your limit.</p></details>
+<details><summary>Can I export my data?</summary><p>Yes. Export raw events as CSV at any time, or send them to your warehouse on the Scale plan.</p></details>
+<details><summary>Can I cancel whenever I like?</summary><p>Yes. Cancel in two clicks from your billing page. Yearly plans are refunded pro rata within 30 days.</p></details>
+</div>
+</div>
+</section>
+
+<section id="start" style="padding-top:0">
+<div class="wrap"><div class="fin">
+<h2>Start reading your product today</h2>
+<p class="sub" id="sel">Free for 14 days. No credit card, no commitment.</p>
+<form id="sf" novalidate><label for="em" style="position:absolute;left:-9999px">Work email</label><input id="em" type="email" placeholder="you@company.com" autocomplete="email"><button class="btn" type="submit">Create free account</button></form>
+<div class="msg" id="msg" role="status"></div>
+</div></div>
+</section>
+</main>
+
+<footer class="main">
+<div class="wrap fg">
+<div><a class="logo" href="#top">Pulsely</a><p>Cookieless product analytics for teams that want answers, not dashboards full of noise.</p>
+<div class="soc"></div></div>
+<div><h4>Product</h4><a href="#features">Features</a><a href="#how">How it works</a><a href="#pricing">Pricing</a></div>
+<div><h4>Resources</h4><a href="#faq">FAQ</a><a href="#start">Get started</a><a href="#top">Back to top</a></div>
+<div><h4>Company</h4><a href="#top">About</a><a href="#top">Privacy</a><a href="#top">Terms</a></div>
+</div>
+</footer>
+<div class="credit">© 2026 · Designed &amp; developed by Mohamed Yousry · <a href="mailto:wx33693@gmail.com">wx33693@gmail.com</a></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+// IMAGE SLOTS: DEFAULT_IMG fills every image slot; set img on a testimonial to override.
+const DEFAULT_IMG="";
+const fmt=n=>Math.round(n).toLocaleString("en-US");
+const rnd=(a,b)=>a+Math.random()*(b-a);
+const calm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+$("#mb").onclick=function(){const o=$("#nav").classList.toggle("open");this.setAttribute("aria-expanded",o)};
+document.addEventListener("click",e=>{const a=e.target.closest("nav a");if(a){$("#nav").classList.remove("open");$("#mb").setAttribute("aria-expanded","false")}});
+// live chart
+const W=600,H=200,N=28;let V=[...Array(N)].map((_,i)=>60+i*2.4+Math.sin(i/2)*10+rnd(-6,6));
+const pts=v=>{const mx=Math.max(...v)*1.12,mn=Math.min(...v)*.88;return v.map((y,i)=>[i*W/(N-1),H-12-(y-mn)/(mx-mn)*(H-30)])};
+const curve=p=>{let d=`M${p[0][0]} ${p[0][1]}`;for(let i=1;i<p.length;i++){const a=p[i-1],b=p[i],m=(a[0]+b[0])/2;d+=`C${m} ${a[1]} ${m} ${b[1]} ${b[0]} ${b[1]}`}return d};
+function draw(){const p=pts(V),d=curve(p);$("#ln").setAttribute("d",d);$("#ar").setAttribute("d",d+`L${W} ${H}L0 ${H}Z`);const l=p[p.length-1];$("#dt").setAttribute("cx",l[0]-4);$("#dt").setAttribute("cy",l[1])}
+draw();
+const PG=[["/pricing",4210],["/features",3180],["/blog/launch",2240],["/signup",1760]];
+function pages(){const mx=Math.max(...PG.map(x=>x[1]));$("#pg").innerHTML=PG.map(x=>`<div><b style="font-weight:500">${x[0]}</b><span>${fmt(x[1])}</span><i style="--w:${x[1]/mx*100}%"></i></div>`).join("")}
+pages();
+let k1=1284,k2=8420,k3=4.2;
+if(!calm)setInterval(()=>{
+ V.shift();V.push(Math.max(30,V[V.length-1]+rnd(-9,12)));draw();
+ k1=Math.max(900,k1+rnd(-40,48));k2+=rnd(10,90);k3=Math.min(6,Math.max(3,k3+rnd(-.08,.1)));
+ $("#k1").textContent=fmt(k1);$("#k2").textContent="$"+fmt(k2);$("#k3").textContent=k3.toFixed(1)+"%";$("#k3d").textContent=(k3>=4.2?"+":"")+(k3-3.9).toFixed(1);
+ PG.forEach(x=>x[1]+=Math.round(rnd(0,26)));pages();
+},1600);
+// event stream
+const EV=[["page_view","/pricing"],["signup","free_trial"],["page_view","/features"],["click","cta_start"],["purchase","growth_yearly"],["page_view","/blog/launch"],["invite","teammate"]];
+const evUl=$("#ev");let ei=0;
+function addEv(){const e=EV[ei++%EV.length],li=document.createElement("li");li.innerHTML=`<span>${e[0]}</span><b style="font-weight:400">${e[1]}</b><small>${new Date().toLocaleTimeString("en-US",{hour12:false})}</small>`;evUl.prepend(li);while(evUl.children.length>5)evUl.lastChild.remove()}
+for(let i=0;i<5;i++)addEv();
+if(!calm)setInterval(addEv,1800);
+// heatmap
+$("#hm").innerHTML=[...Array(35)].map((_,i)=>{const r=Math.floor(i/7),c=i%7;return `<i style="--o:${Math.max(.1,1-r*.17-c*.08).toFixed(2)}"></i>`}).join("");
+// privacy tile image slot
+if(DEFAULT_IMG)$("#pvi").innerHTML=`<img class="ph" src="${DEFAULT_IMG}" alt="" loading="lazy">`;
+// copy
+$("#cp").onclick=async function(){const t=$("#cd").textContent;try{await navigator.clipboard.writeText(t);this.textContent="Copied"}catch(e){const r=document.createRange();r.selectNodeContents($("#cd"));const s=getSelection();s.removeAllRanges();s.addRange(r);this.textContent="Press copy"}setTimeout(()=>this.textContent="Copy",1800)};
+// pricing
+const PL=[{n:"Starter",p:19,e:"50k events a month",f:["1 project","30-day history","Email support"]},{n:"Growth",p:49,e:"500k events a month",hot:1,f:["10 projects","12-month history","Funnels and retention","Slack alerts"]},{n:"Scale",p:129,e:"5M events a month",f:["Unlimited projects","Unlimited history","SSO and audit log","Priority support"]}];
+let yearly=false,plan="Growth";
+function plans(){$("#pl").innerHTML=PL.map(x=>{const m=yearly?Math.round(x.p*.8):x.p;return `<div class="pc${x.hot?" hot":""}">${x.hot?'<span class="tag">Most popular</span>':""}<h3>${x.n}</h3><div class="pr">$${m}<small> /month</small></div><p class="bl">${yearly?"Billed $"+fmt(m*12)+" yearly":"Billed monthly"}</p><ul><li>${x.e}</li>${x.f.map(f=>`<li>${f}</li>`).join("")}</ul><a class="btn${x.hot?"":" ghost"}" href="#start" data-p="${x.n}">Choose ${x.n}</a></div>`}).join("")}
+plans();
+function per(y){yearly=y;$("#bm").classList.toggle("on",!y);$("#by").classList.toggle("on",y);plans()}
+[["#bm",false],["#by",true]].forEach(([s,v])=>{const el=$(s);el.onclick=()=>per(v);el.onkeydown=e=>{if(e.key=="Enter"||e.key==" "){e.preventDefault();per(v)}}});
+document.addEventListener("click",e=>{const a=e.target.closest("[data-p]");if(a){plan=a.dataset.p;$("#sel").textContent=`You chose ${plan}, billed ${yearly?"yearly":"monthly"}. Free for 14 days.`}});
+// testimonials
+const T=[["We found a 30% drop at step two within an hour. It would have taken us weeks before.","Dana Whitfield","Head of Product, Northwind"],["Setup took ten minutes and the board finally trusts our numbers.","Ravi Menon","COO, Fieldnote"],["No cookie banner, no data engineer, and better insight than our old stack.","Salma Idris","Founder, Orbit Labs"]];
+$("#rv3").innerHTML=T.map((t,i)=>`<blockquote class="rv"><p>“${t[0]}”</p><div class="who"><div class="av">${DEFAULT_IMG?`<img class="ph" src="${DEFAULT_IMG}" alt="" loading="lazy" style="object-position:${[25,55,80][i]}% ${[30,60,45][i]}%">`:t[1][0]}</div><div><b>${t[1]}</b><span>${t[2]}</span></div></div></blockquote>`).join("");
+// signup
+$("#sf").onsubmit=e=>{e.preventDefault();const v=$("#em").value.trim(),m=$("#msg");
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){m.className="msg err";m.textContent="Enter a valid work email, for example you@company.com.";$("#em").focus();return}
+ m.className="msg";m.textContent="Check your inbox. We sent a link to finish setting up "+v+".";e.target.reset()};
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}}),{threshold:.15});
+$$(".rv").forEach(x=>io.observe(x));
+const links=$$("nav a");$$("main section[id]").forEach(s=>new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting)links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")=="#"+x.target.id))}),{rootMargin:"-45% 0px -50% 0px"}).observe(s));
+</script>
+</body>
+</html>

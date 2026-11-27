@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://wx33693.github.io/sitemap.xml

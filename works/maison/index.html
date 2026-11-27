@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maison Vale · Private wealth advisory, Geneva</title>
+<meta name="description" content="Maison Vale is an independent private wealth advisory in Geneva. Start with the problem, and we build the structure around it.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#04060f;--navy:#0A1230;--surf:#0d1738;--surf2:#122050;--line:rgba(160,185,255,.16);--tx:#e9edfb;--mut:#a3aed4;--blue:#1A5CE6;--bl2:#7aa3ff;--disp:'Barlow Condensed','Arial Narrow',sans-serif;--sans:'Bricolage Grotesque',system-ui,sans-serif;color-scheme:dark;--px:max(20px,env(safe-area-inset-left),env(safe-area-inset-right))}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px;background:var(--bg)}
+body{font:400 1rem/1.6 var(--sans);color:var(--tx);background:var(--bg);overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom)}
+a{color:inherit}button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--bl2);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1200px;margin:auto}.sec{padding:clamp(4.5rem,10vw,8rem) var(--px)}
+h1,h2,h3{font-family:var(--disp);font-weight:800;text-transform:uppercase;line-height:.92;letter-spacing:.005em}
+h2{font-size:clamp(2.6rem,9vw,5.6rem);margin-bottom:1rem}h3{font-size:1.7rem;line-height:1}
+.lead{color:var(--mut);max-width:56ch;font-size:1.05rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:0 1.5rem;border-radius:999px;border:1px solid var(--line);background:transparent;text-decoration:none;cursor:pointer;font-weight:500;transition:background .25s,transform .25s,border-color .25s}
+.btn:hover{border-color:var(--bl2);transform:translateY(-2px)}.btn.p{background:var(--blue);border-color:var(--blue);color:#fff}.btn.p:hover{background:#2f6df2}.btn.sm{min-height:44px;padding:0 1.2rem}
+/* nav */
+.nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(10px + env(safe-area-inset-top)) var(--px) 10px;background:linear-gradient(rgba(4,6,15,.88),rgba(4,6,15,.55));backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-family:var(--disp);font-weight:800;font-size:1.5rem;text-transform:uppercase;min-height:44px}
+.nav nav{display:none;position:fixed;inset:calc(64px + env(safe-area-inset-top)) 0 0;background:var(--bg);padding:2rem var(--px);flex-direction:column;gap:.4rem}
+.nav nav.open{display:flex}.nav nav a{font:800 2.6rem/1.1 var(--disp);text-transform:uppercase;text-decoration:none;padding:.35rem 0;border-bottom:1px solid var(--line)}
+.nav nav a[aria-current=true]{color:var(--bl2)}.nav .hb{display:none}
+.burger{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:none;display:grid;place-content:center;gap:6px;cursor:pointer}
+.burger i{display:block;width:18px;height:2px;background:var(--tx);transition:transform .3s}
+.burger[aria-expanded=true] i:first-child{transform:translateY(4px) rotate(45deg)}.burger[aria-expanded=true] i:last-child{transform:translateY(-4px) rotate(-45deg)}
+@media(min-width:900px){.nav nav{display:flex;position:static;flex-direction:row;padding:0;background:none;gap:1.6rem}.nav nav a{font:500 .95rem var(--sans);text-transform:none;border:0;padding:.6rem 0;color:var(--mut)}.nav nav a:hover,.nav nav a[aria-current=true]{color:var(--tx)}.nav .hb{display:inline-flex}.burger,.nav nav .mo{display:none}}
+/* hero */
+.hero{position:relative;min-height:100svh;padding:calc(90px + env(safe-area-inset-top)) var(--px) 3rem;display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden;background:radial-gradient(80% 50% at 50% 38%,rgba(26,92,230,.35),transparent 70%),linear-gradient(175deg,#0A1230 0%,#060a1c 55%,#03050c 100%)}
+.ghost{position:absolute;left:50%;top:9%;transform:translateX(-50%);font:800 clamp(11rem,46vw,40rem)/.8 var(--disp);color:transparent;-webkit-text-stroke:1.5px rgba(110,150,255,.32);pointer-events:none;user-select:none;letter-spacing:.02em}
+.stage{position:relative;width:100%;height:min(78vw,400px);margin-top:1rem;perspective:1100px;display:grid;place-items:center;touch-action:pan-y;cursor:grab;user-select:none}
+.stage:active{cursor:grabbing}.folio{--w:190px;--h:252px;--d:52px;position:relative;width:var(--w);height:var(--h);transform-style:preserve-3d}
+.f{position:absolute;left:50%;top:50%;overflow:hidden}
+.f.fr,.f.bk{width:var(--w);height:var(--h);margin:calc(var(--h)/-2) 0 0 calc(var(--w)/-2)}
+.f.fr{transform:translateZ(calc(var(--d)/2));background:linear-gradient(150deg,#2a6df0,#0c2a85 70%);border-radius:4px 10px 10px 4px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;text-align:left;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.f.bk{transform:rotateY(180deg) translateZ(calc(var(--d)/2));background:#0a1c63}
+.f.rt,.f.lf{width:var(--d);height:var(--h);margin:calc(var(--h)/-2) 0 0 calc(var(--d)/-2);background:repeating-linear-gradient(0deg,#e9edfb 0 3px,#aab8e6 3px 5px)}
+.f.rt{transform:rotateY(90deg) translateZ(calc(var(--w)/2))}.f.lf{transform:rotateY(-90deg) translateZ(calc(var(--w)/2));background:linear-gradient(90deg,#08164f,#1445b8)}
+.f.tp,.f.bt{width:var(--w);height:var(--d);margin:calc(var(--d)/-2) 0 0 calc(var(--w)/-2);background:repeating-linear-gradient(90deg,#e9edfb 0 3px,#aab8e6 3px 5px)}
+.f.tp{transform:rotateX(90deg) translateZ(calc(var(--h)/2))}.f.bt{transform:rotateX(-90deg) translateZ(calc(var(--h)/2))}
+.fr b{font:800 3.4rem/.9 var(--disp);color:#fff}.fr small{font-size:.7rem;color:#cfdcff;line-height:1.4}
+.shadow{position:absolute;bottom:2%;width:220px;height:30px;border-radius:50%;background:rgba(0,0,0,.55);filter:blur(16px)}
+.hint{font-size:.85rem;color:var(--mut);display:flex;align-items:center;gap:.5rem}
+.hero h1{position:relative;font-size:clamp(3.2rem,12vw,8.6rem);margin:1.4rem 0 1rem}
+.hero p{position:relative;color:var(--mut);max-width:50ch;margin-bottom:1.6rem}.cta{position:relative;display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
+/* picker */
+.picks{display:grid;gap:14px;margin-top:2.4rem}@media(min-width:760px){.picks{grid-template-columns:1fr 1fr}}
+.pick{text-align:left;background:linear-gradient(160deg,var(--surf),#08102a);border:1px solid var(--line);border-radius:26px;padding:1.6rem;cursor:pointer;display:flex;flex-direction:column;gap:.9rem;min-height:44px;transition:border-color .25s,transform .25s}
+.pick:hover{transform:translateY(-3px)}.pick[aria-pressed=true]{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue),0 20px 50px -20px rgba(26,92,230,.7)}
+.pick p{color:var(--mut)}.tags{display:flex;flex-wrap:wrap;gap:.4rem}.tags span{padding:.25rem .8rem;border:1px solid var(--line);border-radius:999px;font-size:.82rem;color:var(--mut)}
+.pickbar{margin-top:1.2rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;padding:1rem 1.4rem;border-radius:999px;background:var(--surf);border:1px solid var(--line)}
+/* slider */
+.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap}.ctl{display:flex;align-items:center;gap:.7rem}
+.cnt{font:800 1.8rem var(--disp);min-width:5.2rem;text-align:center}.ar{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:none;cursor:pointer;display:grid;place-items:center;transition:background .2s}.ar:hover{background:var(--blue)}
+.track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;margin:2rem calc(var(--px)*-1) 0;padding:0 var(--px) 8px;scrollbar-width:none;cursor:grab}.track::-webkit-scrollbar{display:none}.track.dr{scroll-snap-type:none;cursor:grabbing;user-select:none}
+.card{flex:0 0 min(80vw,340px);scroll-snap-align:start;border:1px solid var(--line);border-radius:26px;overflow:hidden;background:var(--surf)}
+.art{height:210px;background:radial-gradient(circle at 70% 25%,hsl(var(--h) 90% 60%/.9),transparent 55%),linear-gradient(160deg,hsl(var(--h) 70% 22%),#050a1f);position:relative}
+.art svg{position:absolute;inset:0;width:100%;height:100%}.card div.t{padding:1.2rem 1.3rem 1.5rem}.card p{color:var(--mut);font-size:.92rem;margin-top:.5rem}.card em{font-style:normal;color:var(--bl2);font-size:.85rem}
+.bar{height:2px;background:var(--line);margin-top:1.2rem;border-radius:2px}.bar i{display:block;height:100%;background:var(--blue);width:14%;transition:width .3s}
+/* stats */
+.stats{background:linear-gradient(180deg,var(--bg),var(--navy) 50%,var(--bg))}.sg{display:grid;grid-template-columns:1fr 1fr;gap:2.2rem 1rem;margin-top:2.6rem}@media(min-width:820px){.sg{grid-template-columns:repeat(4,1fr)}}
+.sg div{border-top:1px solid var(--line);padding-top:1rem}.sg b{font:800 clamp(2.6rem,8vw,4.8rem)/1 var(--disp);display:block}.sg span{color:var(--mut);font-size:.95rem}
+/* method */
+.meth{display:grid;gap:12px}@media(min-width:860px){.meth{grid-template-columns:.8fr 1.2fr;gap:4rem}}
+.mc{position:sticky;top:64px;align-self:start;z-index:2;padding:.6rem 0;background:linear-gradient(var(--bg) 75%,transparent);padding-top:calc(.6rem + env(safe-area-inset-top)*0)}
+.mc b{font:800 clamp(4.5rem,16vw,11rem)/.85 var(--disp);color:var(--blue)}.mc span{font:800 clamp(1.4rem,4vw,2rem) var(--disp);color:var(--mut)}.mc h3{margin-top:.6rem;font-size:1.5rem}
+.step{min-height:34vh;padding:1.4rem 0;border-top:1px solid var(--line);opacity:.35;transition:opacity .4s}.step.on{opacity:1}.step p{color:var(--mut);max-width:48ch;margin-top:.7rem}@media(min-width:860px){.step{min-height:52vh}}
+/* team */
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:2.4rem}@media(min-width:860px){.tg{grid-template-columns:repeat(4,1fr)}}
+.tm{border:1px solid var(--line);border-radius:22px;padding:.8rem .8rem 1.2rem;background:var(--surf)}.av{aspect-ratio:1;border-radius:16px;margin-bottom:.9rem;display:grid;place-items:center;font:800 3.6rem var(--disp);background:radial-gradient(circle at 30% 20%,hsl(var(--h) 85% 58%),hsl(var(--h) 70% 16%) 75%)}
+.tm h3{font-size:1.35rem}.tm p{color:var(--mut);font-size:.88rem;margin-top:.3rem;line-height:1.4}
+/* faq */
+.fq{margin-top:2rem;border-top:1px solid var(--line)}.fq button{width:100%;display:flex;justify-content:space-between;gap:1rem;align-items:center;text-align:left;min-height:64px;padding:1rem 0;background:none;border:0;cursor:pointer;font:600 1.1rem var(--sans)}
+.fq button::after{content:"+";font:400 1.8rem var(--sans);color:var(--bl2);transition:transform .3s}.fq button[aria-expanded=true]::after{transform:rotate(45deg)}
+.fq .a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s}.fq .a.open{grid-template-rows:1fr}.fq .a p{overflow:hidden;color:var(--mut);max-width:62ch}.fq .a.open p{padding-bottom:1.2rem}.fq>div{border-bottom:1px solid var(--line)}
+/* contact */
+.ct{background:radial-gradient(70% 60% at 80% 0,rgba(26,92,230,.3),transparent),var(--navy);border-radius:36px;padding:clamp(1.6rem,5vw,4rem);display:grid;gap:2.4rem;border:1px solid var(--line)}@media(min-width:900px){.ct{grid-template-columns:1fr 1fr}}
+.clock{font:800 clamp(2.6rem,9vw,4.6rem)/1 var(--disp);margin:1.4rem 0 .2rem;font-variant-numeric:tabular-nums}.ct address{font-style:normal;color:var(--mut)}
+form{display:grid;gap:1rem}label{font-size:.9rem;color:var(--mut);display:grid;gap:.4rem}
+input,select,textarea{width:100%;min-height:48px;padding:.75rem 1rem;border-radius:16px;border:1px solid var(--line);background:#070d26;color:var(--tx)}textarea{min-height:120px;resize:vertical}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--mut) 50%),linear-gradient(135deg,var(--mut) 50%,transparent 50%);background-position:calc(100% - 22px) 55%,calc(100% - 16px) 55%;background-size:6px 6px;background-repeat:no-repeat}
+option{background:#070d26}.err{color:#ff9aa8;font-size:.82rem;min-height:1em}[aria-invalid=true]{border-color:#ff7b8f}.ok{display:none;padding:1rem 1.2rem;border-radius:16px;border:1px solid var(--blue);background:rgba(26,92,230,.18)}.ok.show{display:block}
+/* footer */
+footer{padding:3rem var(--px) 1.5rem;border-top:1px solid var(--line)}.fg{display:grid;gap:2rem;grid-template-columns:1fr 1fr}.fg>div:first-child{grid-column:1/-1}@media(min-width:800px){.fg{grid-template-columns:2fr 1fr 1fr 1fr}.fg>div:first-child{grid-column:auto}}
+footer h4{font:600 .9rem var(--sans);color:var(--mut);margin-bottom:.6rem}footer a{display:block;text-decoration:none;padding:.5rem 0;min-height:44px}footer p{color:var(--mut);max-width:34ch;font-size:.92rem}
+.cr{margin-top:2rem;padding:1.2rem var(--px) calc(1.2rem + env(safe-area-inset-bottom));border-top:1px solid var(--line);text-align:center;font-size:.85rem;color:var(--mut);background:#02030a}.cr a{color:var(--bl2)}
+/* cookie */
+.ck{position:fixed;left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));bottom:calc(14px + env(safe-area-inset-bottom));z-index:60;max-width:420px;padding:1.2rem;border-radius:24px;background:rgba(10,18,48,.96);border:1px solid var(--line);backdrop-filter:blur(14px);box-shadow:0 20px 60px rgba(0,0,0,.6);display:none}.ck.show{display:block}.ck p{font-size:.88rem;color:var(--mut);margin-bottom:.9rem}.ck div{display:flex;gap:.6rem}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s,transform .8s}.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body id="top">
+<header class="nav">
+<a class="logo" href="#top"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="9" fill="#1A5CE6"/><path d="M7 9l8 13 8-13" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/></svg>Maison Vale</a>
+<nav id="menu" aria-label="Main"><a href="#problem">Advisory</a><a href="#work">Mandates</a><a href="#results">Results</a><a href="#method">Method</a><a href="#team">Team</a><a href="#faq">FAQ</a><a class="mo" href="#contact">Book a call</a></nav>
+<a class="btn p sm hb" href="#contact">Book a call</a>
+<button class="burger" id="bg" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><i></i><i></i></button>
+</header>
+
+<main>
+<section class="hero" aria-label="Introduction">
+<div class="ghost" aria-hidden="true">VALE</div>
+<div class="stage" id="stage" tabindex="0" role="img" aria-label="Rotatable 3D folio. Drag, or use the arrow keys, to turn it.">
+<div class="shadow"></div>
+<div class="folio" id="folio">
+<div class="f fr"><small>Private mandate<br>No. 0427 · Geneva</small><b>MV</b><small>Held in confidence<br>since 2008</small></div>
+<div class="f bk"></div><div class="f rt"></div><div class="f lf"></div><div class="f tp"></div><div class="f bt"></div>
+</div></div>
+<p class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12a8 8 0 0114-5M20 12a8 8 0 01-14 5M18 3v4h-4M6 21v-4h4"/></svg>Drag the folio to turn it</p>
+<h1>Wealth, held with discipline</h1>
+<p>An independent advisory in Geneva. We start with the problem you have, then build the structure, the custody and the paperwork around it.</p>
+<div class="cta"><a class="btn p" href="#problem">Find your starting point</a><a class="btn" href="#contact">Speak to an advisor</a></div>
+</section>
+
+<section class="sec" id="problem"><div class="wrap">
+<h2 class="rv">What problem are you solving?</h2><p class="lead rv">Choose the situation closest to yours. We will route you to the advisor who handles it every week.</p>
+<div class="picks" id="picks" role="group" aria-label="Choose a situation"></div>
+<div class="pickbar rv" id="pbar"><span id="ptxt">Select a situation to see how we would begin.</span><a class="btn p sm" href="#contact" id="plink">Discuss this</a></div>
+</div></section>
+
+<section class="sec" id="work"><div class="wrap">
+<div class="sh"><div><h2 class="rv">Recent mandates</h2><p class="lead rv">Anonymised engagements from the last three years.</p></div>
+<div class="ctl"><button class="ar" id="pv" aria-label="Previous mandate"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button><span class="cnt" id="cn" aria-live="polite">01 / 07</span><button class="ar" id="nx" aria-label="Next mandate"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button></div></div>
+<div class="track" id="track" tabindex="0" aria-label="Mandates, scroll horizontally"></div><div class="bar"><i id="pb"></i></div>
+</div></section>
+
+<section class="sec stats" id="results"><div class="wrap">
+<h2 class="rv">Results we stand behind</h2><div class="sg" id="sg"></div>
+</div></section>
+
+<section class="sec" id="method"><div class="wrap"><h2 class="rv">How we work</h2>
+<div class="meth"><div class="mc" aria-live="polite"><b id="mn">01</b> <span>/ 06</span><h3 id="mt">Listen</h3></div><div id="steps"></div></div>
+</div></section>
+
+<section class="sec" id="team"><div class="wrap">
+<h2 class="rv">The people on your file</h2><p class="lead rv">Four partners, each with more than a decade in private banking, trusts or tax.</p><div class="tg" id="tg"></div>
+</div></section>
+
+<section class="sec" id="faq"><div class="wrap" style="max-width:860px">
+<h2 class="rv">Questions we hear first</h2><div class="fq" id="fq"></div>
+</div></section>
+
+<section class="sec" id="contact"><div class="wrap"><div class="ct">
+<div><h2>Start with one conversation</h2><p class="lead">Tell us what you are trying to solve. A partner replies within one working day, never a sales team.</p>
+<div class="clock" id="clk" aria-label="Local time in Geneva">--:--:--</div><address>Local time in Geneva<br>Rue du Rhône 41, 1204 Geneva<br>+41 22 555 01 27</address></div>
+<form id="cf" novalidate aria-label="Contact form">
+<label>Full name<input name="n" autocomplete="name" required><span class="err" data-e="n"></span></label>
+<label>Email<input name="e" type="email" autocomplete="email" required><span class="err" data-e="e"></span></label>
+<label>Topic<select name="t" id="topic" required><option value="">Choose a topic</option></select><span class="err" data-e="t"></span></label>
+<label>Message<textarea name="m" required></textarea><span class="err" data-e="m"></span></label>
+<button class="btn p" type="submit">Send message</button><div class="ok" id="ok" role="status">Thank you. Your message is with our partners and you will hear from us within one working day.</div>
+</form></div></div></section>
+</main>
+
+<footer><div class="wrap fg">
+<div><a class="logo" href="#top" style="padding:0">Maison Vale</a><p>Independent private wealth advisory. Authorised and supervised in Switzerland. Fictional demo brand.</p></div>
+<div><h4>Advisory</h4><a href="#problem">Situations</a><a href="#work">Mandates</a><a href="#results">Results</a></div>
+<div><h4>Firm</h4><a href="#method">Method</a><a href="#team">Team</a><a href="#faq">FAQ</a></div>
+<div><h4>Contact</h4><a href="#contact">Book a call</a><a href="#contact">Geneva office</a></div>
+</div></footer>
+<div class="cr">© 2026 · Designed &amp; developed by Mohamed Yousry · <a href="mailto:wx33693@gmail.com">wx33693@gmail.com</a></div>
+
+<div class="ck" id="ck" role="dialog" aria-label="Cookie preferences"><p>We use only the cookies needed to run this site and one to remember this choice.</p><div><button class="btn p sm" data-c="1">Accept</button><button class="btn sm" data-c="0">Decline</button></div></div>
+
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)],RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const SV=[["Wealth feels scattered","Accounts at four banks, no single view of risk or cost.",["Consolidation","Reporting","Custody"],"consolidating scattered wealth"],
+["A business is about to change hands","You are selling or merging and want the proceeds structured early.",["Exit planning","Tax","Holding companies"],"preparing a business exit"],
+["Wealth is moving between generations","You want clear rules for the next generation without losing control today.",["Trusts","Foundations","Governance"],"planning a family transfer"],
+["Capital sits in more than one country","Residency, tax and banking rules pull in different directions.",["Relocation","Cross-border tax","Banking access"],"managing cross-border capital"]];
+const PR=[["Family holding, Zurich","Nine accounts folded into one reporting line.","Fees down 31%",220],["Founder exit, Lyon","Sale proceeds placed in a three-layer structure.","CHF 86m structured",190],["Foundation, Vaduz","Governance charter for a second generation.","Signed in 11 weeks",260],["Relocation, Dubai to Geneva","Residency, banking and tax filed in one plan.","Closed in 5 months",160],["Shipping family, Athens","Fleet shares moved into a trust with clear votes.","4 heirs aligned",205],["Medtech founder, Basel","Pre-IPO planning and a lock-up liquidity ladder.","Liquidity 2 years ahead",240],["Art collection, Monaco","Insurance, custody and succession for 140 works.","Fully catalogued",285]];
+const ST=[[4.2,1,"CHF ","bn","Assets under advisory"],[18,0,"","","Years independent"],[96,0,"","%","Clients who stay five years or more"],[31,0,"","","Nationalities served"]];
+const MS=[["Listen","One long conversation, no slides. We write down what you want money to do and what worries you."],["Map","We collect every account, holding and obligation into one picture, with costs shown line by line."],["Design","Two or three options with trade-offs in plain language, including the option of doing less."],["Structure","Lawyers, trustees and banks are chosen by us, but paid at their own rates, never ours."],["Execute","We run the paperwork and chase every signature, then confirm each step to you in writing."],["Review","A fixed review twice a year. The plan changes when your life does, and the fee does not."]];
+const TM=[["Élodie Marchand","Managing partner. Former head of family office coverage.",220],["Tobias Reinhardt","Partner, trusts and foundations. Swiss-qualified lawyer.",200],["Amara Okonkwo","Partner, cross-border tax. Ex Big Four, London and Geneva.",160],["Julien Favre","Partner, investments. Twelve years in private banking.",260]];
+const FQ=[["What is the minimum to work with you?","We advise families with investable assets from CHF 5 million. Below that we will tell you honestly who may serve you better."],["How are you paid?","A flat annual fee agreed in advance. We take no commissions from banks, funds or insurers."],["Do you hold our assets?","No. Assets stay in your name at regulated custodians. We coordinate and report, and cannot move your money alone."],["Can you work with our existing bank and lawyers?","Yes, often. We add structure around the people you already trust, and only suggest changes where there is a clear gain."],["How long does a typical engagement take?","A first plan takes six to ten weeks. Most clients then stay with us for years under the review cycle."]];
+let sel=-1;
+$('#picks').innerHTML=SV.map((s,i)=>`<button class="pick rv" aria-pressed="false" data-i="${i}"><h3>${s[0]}</h3><p>${s[1]}</p><span class="tags">${s[2].map(t=>`<span>${t}</span>`).join('')}</span></button>`).join('');
+const TP=["Wealth feels scattered","A business exit","A family transfer","Cross-border capital","General enquiry"];
+$('#topic').insertAdjacentHTML('beforeend',TP.map(t=>`<option>${t}</option>`).join(''));
+$('#picks').onclick=e=>{const b=e.target.closest('.pick');if(!b)return;sel=+b.dataset.i;$$('.pick').forEach(x=>x.setAttribute('aria-pressed',x===b));
+$('#ptxt').textContent=`Starting point: ${SV[sel][3]}. A partner who handles this weekly will take your call.`;$('#topic').value=TP[sel]};
+$('#plink').onclick=()=>{if(sel>-1)$('#topic').value=TP[sel]};
+$('#track').innerHTML=PR.map((p,i)=>`<article class="card" style="--h:${p[3]}"><div class="art"><svg viewBox="0 0 340 210" aria-hidden="true" fill="none" stroke="rgba(255,255,255,.25)"><circle cx="${90+i*20}" cy="120" r="70"/><circle cx="${180+i*10}" cy="100" r="46"/><path d="M0 170h340M0 140h340M0 110h340"/></svg></div><div class="t"><em>${String(i+1).padStart(2,'0')}</em><h3>${p[0]}</h3><p>${p[1]}</p><p><b style="color:var(--tx)">${p[2]}</b></p></div></article>`).join('');
+$('#sg').innerHTML=ST.map((s,i)=>`<div class="rv"><b data-to="${s[0]}" data-d="${s[1]}" data-p="${s[2]}" data-s="${s[3]}">${s[2]}0${s[3]}</b><span>${s[4]}</span></div>`).join('');
+$('#steps').innerHTML=MS.map((s,i)=>`<div class="step" data-i="${i}"><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join('');
+$('#tg').innerHTML=TM.map(t=>`<article class="tm rv"><div class="av" style="--h:${t[2]}" aria-hidden="true">${t[0][0]}${t[0].split(' ')[1][0]}</div><h3>${t[0]}</h3><p>${t[1]}</p></article>`).join('');
+$('#fq').innerHTML=FQ.map((f,i)=>`<div><h3 style="font:inherit"><button aria-expanded="false" aria-controls="a${i}" id="q${i}">${f[0]}</button></h3><div class="a" id="a${i}" role="region" aria-labelledby="q${i}"><p>${f[1]}</p></div></div>`).join('');
+$('#fq').onclick=e=>{const b=e.target.closest('button');if(!b)return;const o=b.getAttribute('aria-expanded')=='true';b.setAttribute('aria-expanded',!o);$('#'+b.getAttribute('aria-controls')).classList.toggle('open',!o)};
+/* menu */
+const bg=$('#bg'),mn=$('#menu');const tg=o=>{mn.classList.toggle('open',o);bg.setAttribute('aria-expanded',o);bg.setAttribute('aria-label',o?'Close menu':'Open menu');document.body.style.overflow=o?'hidden':''};
+bg.onclick=()=>tg(!mn.classList.contains('open'));mn.onclick=e=>{if(e.target.closest('a'))tg(false)};addEventListener('keydown',e=>{if(e.key=='Escape')tg(false)});
+/* reveal, nav state, counters, steps */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);const c=$('[data-to]',e.target);if(c)cnt(c)}}),{threshold:.15});
+$$('.rv').forEach(x=>io.observe(x));
+function cnt(el){const to=+el.dataset.to,d=+el.dataset.d,f=v=>el.dataset.p+v.toFixed(d)+el.dataset.s;if(RM){el.textContent=f(to);return}const t0=performance.now();(function s(t){const k=Math.min((t-t0)/1500,1);el.textContent=f(to*(1-Math.pow(1-k,3)));k<1&&requestAnimationFrame(s)})(t0)}
+const links=$$('#menu a:not(.mo)');const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')=='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+$$('main section[id]').forEach(s=>so.observe(s));
+const stp=$$('.step'),mo=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const i=+e.target.dataset.i;stp.forEach(s=>s.classList.toggle('on',s===e.target));$('#mn').textContent=String(i+1).padStart(2,'0');$('#mt').textContent=MS[i][0]}}),{rootMargin:'-40% 0px -50% 0px'});stp.forEach(s=>mo.observe(s));stp[0].classList.add('on');
+/* slider */
+const tr=$('#track'),cd=()=>$('.card').offsetWidth+14;
+const upd=()=>{const i=Math.min(PR.length-1,Math.round(tr.scrollLeft/cd()));$('#cn').textContent=`${String(i+1).padStart(2,'0')} / ${String(PR.length).padStart(2,'0')}`;$('#pb').style.width=((i+1)/PR.length*100)+'%'};
+tr.addEventListener('scroll',upd,{passive:true});$('#pv').onclick=()=>tr.scrollBy({left:-cd(),behavior:'smooth'});$('#nx').onclick=()=>tr.scrollBy({left:cd(),behavior:'smooth'});
+tr.onkeydown=e=>{if(e.key=='ArrowRight')$('#nx').click();if(e.key=='ArrowLeft')$('#pv').click()};
+let dx=0,sl=0,dn=0;tr.onpointerdown=e=>{if(e.pointerType!='mouse')return;dn=1;dx=e.clientX;sl=tr.scrollLeft;tr.classList.add('dr');tr.setPointerCapture(e.pointerId)};
+tr.onpointermove=e=>{if(dn)tr.scrollLeft=sl-(e.clientX-dx)};tr.onpointerup=tr.onpointercancel=()=>{dn=0;tr.classList.remove('dr');tr.scrollTo({left:Math.round(tr.scrollLeft/cd())*cd(),behavior:'smooth'})};upd();
+/* 3D folio */
+const fo=$('#folio'),st=$('#stage');let rx=-14,ry=-30,v=.25,dg=0,lx=0,ly=0;
+const ap=()=>fo.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;
+st.onpointerdown=e=>{dg=1;lx=e.clientX;ly=e.clientY;st.setPointerCapture(e.pointerId)};
+st.onpointermove=e=>{if(!dg)return;const a=e.clientX-lx,b=e.clientY-ly;lx=e.clientX;ly=e.clientY;ry+=a*.6;rx=Math.max(-60,Math.min(60,rx-b*.5));v=a*.25;ap()};
+st.onpointerup=st.onpointercancel=()=>dg=0;
+st.onkeydown=e=>{const k={ArrowLeft:[0,-15],ArrowRight:[0,15],ArrowUp:[10,0],ArrowDown:[-10,0]}[e.key];if(k){e.preventDefault();rx=Math.max(-60,Math.min(60,rx+k[0]));ry+=k[1];ap()}};
+(function l(){if(!dg&&!RM){ry+=v;v+=(.25-v)*.02;ap()}requestAnimationFrame(l)})();ap();
+/* clock */
+const ck=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Zurich',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+(function t(){$('#clk').textContent=ck.format(new Date());setTimeout(t,1000)})();
+/* form */
+$('#cf').onsubmit=e=>{e.preventDefault();const f=e.target,v={n:f.n.value.trim(),e:f.e.value.trim(),t:f.t.value,m:f.m.value.trim()};
+const er={n:v.n.length<2?'Enter your full name.':'',e:/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(v.e)?'':'Enter a valid email, like name@example.com.',t:v.t?'':'Choose a topic.',m:v.m.length<10?'Write at least 10 characters.':''};
+let bad=0;Object.keys(er).forEach(k=>{$(`[data-e=${k}]`).textContent=er[k];f[k].setAttribute('aria-invalid',!!er[k]);if(er[k]&&!bad){bad=1;f[k].focus()}});
+if(!bad){f.reset();$('#ok').classList.add('show')}else $('#ok').classList.remove('show')};
+/* cookies */
+let cs;try{cs=localStorage.getItem('mv-ck')}catch(e){}
+if(!cs)setTimeout(()=>$('#ck').classList.add('show'),1200);
+$('#ck').onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;try{localStorage.setItem('mv-ck',b.dataset.c)}catch(x){}$('#ck').classList.remove('show')};
+</script>
+</body>
+</html>

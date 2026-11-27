@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aurelia Estates — Luxury Homes</title>
+<meta name="description" content="Aurelia Estates represents distinctive villas, penthouses and townhouses in four of Egypt’s most sought-after areas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08100E;--s:#0F1B18;--s2:#162723;--a:#14B8A6;--t:#E6EFEC;--m:#97ada7;--b:#20332e;--hf:'Fraunces',Georgia,serif;--bf:'Outfit',system-ui,sans-serif;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(80px + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--t);font:400 1rem/1.65 var(--bf);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:60}
+h1,h2,h3{font-family:var(--hf);font-weight:400;line-height:1.12;margin:0}
+p{margin:0}a{color:inherit}button{font-family:inherit}
+:focus-visible{outline:2px solid var(--a);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1200px,100% - 40px);margin-inline:auto}
+section{padding:84px 0}
+.h2{font-size:clamp(2rem,6vw,3.2rem);margin-bottom:14px;letter-spacing:-.01em}
+.lead{color:var(--m);max-width:58ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 26px;border-radius:12px;border:1px solid var(--a);background:var(--a);color:#04201c;font:600 .98rem var(--bf);text-decoration:none;cursor:pointer;transition:background .25s,color .25s}
+.btn:hover{background:transparent;color:var(--a)}
+.btn.ghost{background:transparent;color:var(--t);border-color:#3b5650}.btn.ghost:hover{border-color:var(--a);color:var(--a)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(8,16,14,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--b)}
+.nav{display:flex;align-items:center;gap:8px;height:68px}
+.logo{font:600 1.35rem var(--hf);text-decoration:none;display:flex;align-items:center;gap:10px;min-height:44px;margin-right:auto}
+.logo svg{width:26px;height:26px}
+.links{display:none;gap:4px;list-style:none;margin:0 8px 0 0;padding:0}
+.links a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;text-decoration:none;color:var(--m);font-size:.95rem;border-radius:10px;transition:.2s}
+.links a:hover{color:var(--t)}.links a.on{color:var(--a);background:rgba(20,184,166,.1)}
+.ib{width:48px;height:48px;border:1px solid var(--b);border-radius:12px;background:var(--s);color:var(--t);display:grid;place-items:center;cursor:pointer;position:relative;transition:.2s}
+.ib:hover{border-color:var(--a)}.ib svg{width:20px;height:20px}
+.cnt{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;border-radius:10px;background:var(--a);color:#04201c;font:600 .72rem/20px var(--bf);text-align:center;padding:0 5px}
+.menu{position:fixed;inset:calc(68px + env(safe-area-inset-top,0px)) 0 0;background:var(--bg);z-index:49;padding:20px 20px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:translateY(-8px);transition:.3s}
+.menu.open{opacity:1;visibility:visible;transform:none}
+.menu a{display:flex;align-items:center;min-height:58px;font:400 1.7rem var(--hf);text-decoration:none;border-bottom:1px solid var(--b)}.menu a.on{color:var(--a)}
+@media(min-width:960px){.links{display:flex}.bur,.menu{display:none}}
+/* hero */
+.hero{position:relative;min-height:calc(100svh - 68px);display:flex;flex-direction:column;justify-content:flex-end;padding:60px 0 40px;isolation:isolate;overflow:hidden}
+.hero>svg{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(8,16,14,.25),rgba(8,16,14,.05) 30%,rgba(8,16,14,.9) 88%)}
+.hero h1{font-size:clamp(2.8rem,10.5vw,6.6rem);letter-spacing:-.025em;max-width:13ch;font-weight:400}
+.hero h1 em{font-style:italic;color:#7fe3d6}
+.hero .sub{max-width:48ch;color:#cfe0db;margin:18px 0 32px;font-size:1.08rem}
+.hero .wrap>*{animation:up .9s cubic-bezier(.2,.7,.2,1) both}.hero .wrap>*:nth-child(2){animation-delay:.12s}.hero .wrap>*:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(24px)}}
+.lit{animation:tw 5s ease-in-out infinite alternate}@keyframes tw{50%{opacity:.55}}
+.search{display:grid;gap:12px;background:rgba(15,27,24,.88);backdrop-filter:blur(16px);border:1px solid #2b4a43;border-radius:18px;padding:16px}
+.fld{display:grid;gap:4px}.fld label{font-size:.8rem;color:var(--m);padding-left:2px}
+select,input,textarea{width:100%;min-height:48px;padding:11px 14px;border-radius:10px;border:1px solid #2c4540;background:#0a1512;color:var(--t);font:400 1rem var(--bf)}
+textarea{min-height:100px;resize:vertical}
+select:focus,input:focus,textarea:focus{outline:2px solid var(--a);outline-offset:1px;border-color:var(--a)}
+@media(min-width:800px){.search{grid-template-columns:repeat(3,1fr) auto;align-items:end;padding:18px 20px}.search .btn{height:48px}}
+/* listings */
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:30px 0 8px;padding:16px;background:var(--s);border:1px solid var(--b);border-radius:16px}
+.bar .fld{flex:1 1 150px}
+.chip{min-height:48px;padding:0 18px;border-radius:10px;border:1px solid var(--b);background:#0a1512;color:var(--m);font:500 .95rem var(--bf);cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.2s}
+.chip[aria-pressed=true]{background:var(--a);color:#04201c;border-color:var(--a)}.chip svg{width:16px;height:16px}
+.res{color:var(--m);font-size:.92rem;margin:14px 2px 18px}
+.grid{display:grid;gap:18px}
+@media(min-width:680px){.grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:1040px){.grid{grid-template-columns:repeat(3,1fr)}}
+.lc{background:var(--s);border:1px solid var(--b);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,border-color .3s;animation:pop .5s both}
+@keyframes pop{from{opacity:0;transform:translateY(14px)}}
+.lc:hover{border-color:#2f6d64;transform:translateY(-4px)}
+.lv{position:relative;display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;aspect-ratio:3/2;overflow:hidden}
+.lv svg{width:100%;height:100%;display:block;transition:transform .7s}.lc:hover .lv svg{transform:scale(1.05)}
+.pill{position:absolute;left:12px;bottom:12px;background:rgba(8,16,14,.82);backdrop-filter:blur(8px);border-radius:8px;padding:4px 12px;font:500 1.05rem var(--hf)}
+.fav{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(8,16,14,.75);color:#fff;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(8px);transition:.2s}
+.fav svg{width:20px;height:20px;transition:transform .25s}.fav[aria-pressed=true]{color:#ff7a8a}.fav[aria-pressed=true] svg{fill:currentColor;transform:scale(1.15)}
+.lb{padding:18px 18px 20px;display:grid;gap:6px;flex:1}.lb h3{font-size:1.3rem}
+.loc{color:var(--a);font-size:.88rem}
+.sp{display:flex;gap:16px;color:var(--m);font-size:.9rem;margin-top:4px}.sp span{display:flex;gap:6px;align-items:center}.sp svg{width:16px;height:16px}
+.lb .btn{margin-top:12px;min-height:44px}
+.empty{grid-column:1/-1;text-align:center;padding:50px 20px;border:1px dashed #2f4a44;border-radius:16px}.empty h3{font-size:1.5rem;margin-bottom:8px}.empty p{color:var(--m);margin-bottom:18px}
+/* neighborhoods */
+.alt{background:var(--s)}
+.nb{display:grid;gap:14px;margin-top:34px}
+@media(min-width:640px){.nb{grid-template-columns:repeat(2,1fr)}}@media(min-width:1000px){.nb{grid-template-columns:repeat(4,1fr)}}
+.nc{position:relative;border-radius:16px;overflow:hidden;min-height:300px;border:1px solid var(--b);padding:0;background:var(--bg);cursor:pointer;text-align:left;color:var(--t);display:flex;align-items:flex-end;transition:border-color .3s}
+.nc:hover{border-color:var(--a)}.nc>svg{position:absolute;inset:0;width:100%;height:100%;transition:transform .8s}.nc:hover>svg{transform:scale(1.07)}
+.nc div{position:relative;padding:20px;background:linear-gradient(transparent,rgba(8,16,14,.95) 55%);width:100%}
+.nc h3{font-size:1.4rem}.nc p{color:#b9cdc7;font-size:.9rem;margin:4px 0 8px}.nc b{color:var(--a);font-weight:500;font-size:.9rem}
+/* calculator */
+.calc{display:grid;gap:22px;margin-top:34px}
+@media(min-width:900px){.calc{grid-template-columns:1.1fr .9fr;gap:34px}}
+.panel{background:var(--s);border:1px solid var(--b);border-radius:18px;padding:24px}
+.row2{display:grid;gap:18px}.row2 .fld{gap:6px}
+@media(min-width:560px){.row2{grid-template-columns:1fr 1fr}}
+.rg{display:grid;gap:6px;margin-bottom:18px}.rg .top{display:flex;justify-content:space-between;align-items:baseline;font-size:.92rem}.rg .top b{font:500 1.15rem var(--hf);color:var(--a)}
+input[type=range]{padding:0;min-height:44px;accent-color:var(--a);background:none;border:0}
+.out{display:grid;gap:18px;align-content:start}
+.mo{font:400 clamp(2rem,8vw,3rem) var(--hf);color:var(--t);line-height:1}.mo small{font:400 1rem var(--bf);color:var(--m)}
+.donut{display:flex;align-items:center;gap:20px;flex-wrap:wrap}.donut svg{width:132px;height:132px;flex:none}
+.lg{display:grid;gap:8px;font-size:.92rem}.lg span{display:flex;align-items:center;gap:8px}.lg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.kv{display:grid;gap:8px;border-top:1px solid var(--b);padding-top:16px;font-size:.95rem}.kv div{display:flex;justify-content:space-between;color:var(--m)}.kv b{color:var(--t);font-weight:500}
+/* agents/testimonials */
+.ag{display:grid;gap:16px;margin-top:34px}
+@media(min-width:700px){.ag{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--s);border:1px solid var(--b);border-radius:16px;padding:24px}
+.card.ag1{display:flex;gap:16px;align-items:center}
+.av{width:72px;height:72px;border-radius:50%;flex:none}
+.card h3{font-size:1.2rem}.card .rl{color:var(--a);font-size:.88rem}.card .st{color:var(--m);font-size:.85rem;margin-top:2px}
+.tq{display:grid;gap:16px;margin-top:34px}@media(min-width:900px){.tq{grid-template-columns:repeat(3,1fr)}}
+.tq blockquote{margin:0;font:400 1.15rem/1.55 var(--hf)}.tq cite{display:block;margin-top:16px;font:400 .9rem var(--bf);color:var(--m);font-style:normal}.tq cite b{color:var(--t);font-weight:500}
+.stars{color:var(--a);letter-spacing:3px;margin-bottom:12px}
+/* form */
+.vw{display:grid;gap:36px}@media(min-width:900px){.vw{grid-template-columns:4fr 6fr;gap:70px}}
+.form{background:var(--s);border:1px solid var(--b);border-radius:18px;padding:24px;display:grid;gap:16px}
+.two{display:grid;gap:16px}@media(min-width:620px){.two{grid-template-columns:1fr 1fr}}
+.er{color:#ff9d8a;font-size:.85rem;min-height:1.2em}[aria-invalid=true]{border-color:#ff9d8a}
+.ok{display:none;text-align:center;padding:36px 8px}.ok svg{width:56px;height:56px;color:var(--a);margin-bottom:10px}.ok h3{font-size:1.8rem;margin-bottom:8px}.ok p{color:var(--m)}
+.done form{display:none}.done .ok{display:block}
+.ul{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:14px;color:var(--m)}.ul li{display:flex;gap:12px}.ul svg{width:22px;height:22px;color:var(--a);flex:none;margin-top:2px}
+/* modal */
+.md{position:fixed;inset:0;z-index:100;background:rgba(4,9,8,.88);backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center}
+.md.open{display:flex;animation:fd .25s}@keyframes fd{from{opacity:0}}
+.sheet{background:var(--s);border:1px solid var(--b);width:min(980px,100%);max-height:94svh;overflow:auto;border-radius:22px 22px 0 0;position:relative;animation:sl .35s cubic-bezier(.2,.7,.2,1);padding-bottom:env(safe-area-inset-bottom,0px)}
+@keyframes sl{from{transform:translateY(40px);opacity:0}}
+@media(min-width:760px){.md{align-items:center;padding:20px}.sheet{border-radius:22px}}
+.sheet .x{position:absolute;top:12px;right:12px;z-index:2;background:rgba(8,16,14,.8)}
+.mh{aspect-ratio:16/9;max-height:46svh;overflow:hidden}.mh svg{width:100%;height:100%;display:block}
+.mb{padding:24px;display:grid;gap:20px}@media(min-width:760px){.mb{grid-template-columns:1.4fr 1fr;padding:30px}}
+.mb h2{font-size:clamp(1.7rem,5vw,2.4rem)}.mb .price{font:400 2rem var(--hf);color:var(--a)}
+.spec{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0}.spec div{background:#0a1512;border:1px solid var(--b);border-radius:12px;padding:12px;text-align:center}.spec b{display:block;font:500 1.3rem var(--hf)}.spec span{font-size:.8rem;color:var(--m)}
+.ft{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}.ft span{border:1px solid #2e4b44;border-radius:999px;padding:4px 14px;font-size:.88rem;color:#bfd5cf}
+.side{display:grid;gap:12px;align-content:start;background:#0a1512;border:1px solid var(--b);border-radius:14px;padding:18px}.side p{color:var(--m);font-size:.9rem}.side b.mp{font:400 1.7rem var(--hf);color:var(--t);display:block}
+footer{background:var(--s);border-top:1px solid var(--b);padding:56px 0 36px}
+.fg{display:grid;gap:30px}@media(min-width:760px){.fg{grid-template-columns:2fr 1fr 1fr 1.4fr}}
+footer h3{font:600 .95rem var(--bf);margin-bottom:8px}footer ul{list-style:none;margin:0;padding:0;display:grid}
+footer li a{display:inline-flex;align-items:center;min-height:36px;color:var(--m);text-decoration:none}footer li a:hover{color:var(--a)}footer p{color:var(--m);max-width:36ch}
+.credit{background:#050b09;border-top:1px solid var(--b);padding:16px 0 calc(16px + env(safe-area-inset-bottom,0px));font-size:.85rem;color:var(--m);text-align:center}
+.credit a{color:var(--a);text-decoration:none;display:inline-block;padding:10px 4px}.credit a:hover{text-decoration:underline}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+ <a class="logo" href="#top" aria-label="Aurelia Estates, back to top"><svg viewBox="0 0 32 32" fill="none" stroke="#14B8A6" stroke-width="1.8" aria-hidden="true"><path d="M4 28V14L16 4l12 10v14"/><path d="M11 28V18h10v10"/><path d="M16 4v6"/></svg>Aurelia Estates</a>
+ <ul class="links" id="links"></ul>
+ <button class="ib" id="favnav" aria-label="Show saved homes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0112 7.4 4.3 4.3 0 0119.5 10c0 5.4-7.5 10-7.5 10z"/></svg><span class="cnt" id="fc" hidden>0</span></button>
+ <button class="ib bur" id="bur" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path id="bi" d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+<nav class="menu" id="menu" aria-label="Mobile"></nav>
+
+<main id="top">
+<section class="hero" style="padding-bottom:40px">
+ <svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A modern glass villa with warm lit windows beside a pool at dusk">
+  <defs><linearGradient id="hs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#05110f"/><stop offset=".55" stop-color="#0f3b3a"/><stop offset=".8" stop-color="#2a8f86"/><stop offset="1" stop-color="#0b2a27"/></linearGradient><linearGradient id="pw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3fd3c3"/><stop offset="1" stop-color="#0c4a47"/></linearGradient></defs>
+  <rect width="400" height="700" fill="url(#hs)"/>
+  <circle cx="320" cy="150" r="22" fill="#e6fff9" opacity=".9"/><circle cx="320" cy="150" r="60" fill="#7fe3d6" opacity=".12"/>
+  <g fill="#fff" opacity=".7"><circle cx="40" cy="70" r="1.2"/><circle cx="120" cy="120" r="1"/><circle cx="210" cy="60" r="1.3"/><circle cx="260" cy="180" r="1"/><circle cx="70" cy="200" r="1"/><circle cx="360" cy="60" r="1"/></g>
+  <path d="M0 400L90 340L170 380L260 320L400 390V700H0Z" fill="#06100e" opacity=".8"/>
+  <g><rect x="40" y="380" width="250" height="14" fill="#040a09"/><rect x="60" y="394" width="210" height="96" fill="#071311"/><rect x="170" y="330" width="150" height="64" fill="#040a09"/>
+  <rect class="lit" x="70" y="404" width="60" height="70" fill="#ffd9a0"/><rect class="lit" x="138" y="404" width="52" height="70" fill="#ffc77a" style="animation-delay:-2s"/><rect class="lit" x="198" y="404" width="62" height="70" fill="#ffe3b8" style="animation-delay:-3s"/><rect class="lit" x="184" y="342" width="122" height="40" fill="#ffd9a0" style="animation-delay:-1s"/>
+  <path d="M130 404v70M190 404v70M260 404v70M245 342v40" stroke="#040a09" stroke-width="3"/></g>
+  <rect x="0" y="490" width="400" height="210" fill="#041412"/><rect x="30" y="510" width="300" height="70" rx="3" fill="url(#pw)" opacity=".9"/>
+  <rect x="60" y="520" width="240" height="6" fill="#ffd9a0" opacity=".4"/>
+  <g fill="#041412"><circle cx="20" cy="470" r="28"/><circle cx="370" cy="450" r="36"/><circle cx="345" cy="480" r="26"/></g>
+ </svg>
+ <div class="wrap">
+  <h1>Homes with a <em>view</em> worth coming back to.</h1>
+  <p class="sub">Aurelia Estates represents villas, penthouses and townhouses in four of Egypt’s most sought-after areas. Search by place, type and budget.</p>
+  <form class="search" id="hs-f" aria-label="Search homes">
+   <div class="fld"><label for="hl">Location</label><select id="hl"></select></div>
+   <div class="fld"><label for="ht">Home type</label><select id="ht"></select></div>
+   <div class="fld"><label for="hp">Max price</label><select id="hp"></select></div>
+   <button class="btn" type="submit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Search homes</button>
+  </form>
+ </div>
+</section>
+
+<section id="listings">
+ <div class="wrap">
+  <div class="rv"><h2 class="h2">Featured homes</h2><p class="lead">Nine properties, each walked and photographed by our team. Filter by place, type and price, then open any home for full details.</p></div>
+  <div class="bar">
+   <div class="fld"><label for="fl">Location</label><select id="fl"></select></div>
+   <div class="fld"><label for="ft">Type</label><select id="ft"></select></div>
+   <div class="fld"><label for="fp">Max price</label><select id="fp"></select></div>
+   <div class="fld"><label for="fs">Sort by</label><select id="fs"><option value="f">Featured</option><option value="pa">Price, low to high</option><option value="pd">Price, high to low</option><option value="sf">Largest first</option></select></div>
+   <button class="chip" id="fo" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0112 7.4 4.3 4.3 0 0119.5 10c0 5.4-7.5 10-7.5 10z"/></svg>Saved only</button>
+  </div>
+  <p class="res" id="res" aria-live="polite"></p>
+  <div class="grid" id="grid"></div>
+ </div>
+</section>
+
+<section id="areas" class="alt">
+ <div class="wrap"><div class="rv"><h2 class="h2">Four neighborhoods, four ways to live</h2><p class="lead">Choose a neighborhood to see the homes we have there.</p></div><div class="nb" id="nb"></div></div>
+</section>
+
+<section id="calculator">
+ <div class="wrap"><div class="rv"><h2 class="h2">Mortgage calculator</h2><p class="lead">Adjust the numbers and see your estimated monthly payment of principal and interest. Registration fees, insurance and taxes are not included.</p></div>
+  <div class="calc">
+   <div class="panel">
+    <div class="rg"><div class="top"><label for="cp">Home price</label><b id="cpv"></b></div><input type="range" id="cpr" min="3000000" max="100000000" step="250000" aria-label="Home price slider"><input type="number" id="cp" min="1000000" max="500000000" step="100000" inputmode="numeric"></div>
+    <div class="rg"><div class="top"><label for="cd">Down payment</label><b id="cdv"></b></div><input type="range" id="cd" min="5" max="60" step="1"></div>
+    <div class="row2"><div class="fld"><label for="cr">Interest rate (%)</label><input type="number" id="cr" min="0" max="20" step="0.05" inputmode="decimal"></div><div class="fld"><label for="cy">Loan term</label><select id="cy"><option value="10">10 years</option><option value="15">15 years</option><option value="20" selected>20 years</option></select></div></div>
+   </div>
+   <div class="panel out">
+    <div><p style="color:var(--m)">Estimated monthly payment</p><div class="mo" id="mo"></div></div>
+    <div class="donut"><svg viewBox="0 0 42 42" role="img" aria-label="Share of total cost that is principal versus interest"><circle cx="21" cy="21" r="15.9" fill="none" stroke="#2a6f68" stroke-width="6"/><circle id="dn" cx="21" cy="21" r="15.9" fill="none" stroke="#14B8A6" stroke-width="6" stroke-dasharray="0 100" transform="rotate(-90 21 21)"/></svg>
+    <div class="lg"><span><i style="background:#14B8A6"></i>Principal <b id="lp"></b></span><span><i style="background:#2a6f68"></i>Interest <b id="li"></b></span></div></div>
+    <div class="kv"><div>Loan amount<b id="ka"></b></div><div>Down payment<b id="kd"></b></div><div>Total interest<b id="kt"></b></div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="agents" class="alt">
+ <div class="wrap"><div class="rv"><h2 class="h2">Meet your agents</h2><p class="lead">Every client works with one dedicated agent from first viewing to closing day.</p></div><div class="ag" id="ag"></div>
+ <div class="tq" id="tq"></div></div>
+</section>
+
+<section id="viewing">
+ <div class="wrap vw">
+  <div class="rv"><h2 class="h2">Schedule a viewing</h2><p class="lead">Pick a home and a time. Your agent will confirm by email within a few hours.</p>
+   <ul class="ul"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>Viewings run 7 days a week, 9:00 to 19:00.</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>Private by default. We never list you with other buyers.</li></ul></div>
+  <div class="form rv" id="fbox">
+   <form id="vf" novalidate>
+    <div class="two"><div class="fld"><label for="vn">Full name</label><input id="vn" autocomplete="name"><span class="er" id="vn-e" aria-live="polite"></span></div><div class="fld"><label for="ve">Email</label><input id="ve" type="email" autocomplete="email" inputmode="email"><span class="er" id="ve-e" aria-live="polite"></span></div></div>
+    <div class="two"><div class="fld"><label for="vph">Phone (optional)</label><input id="vph" type="tel" autocomplete="tel" inputmode="tel"><span class="er" id="vph-e" aria-live="polite"></span></div><div class="fld"><label for="vh">Home to view</label><select id="vh"></select><span class="er" id="vh-e" aria-live="polite"></span></div></div>
+    <div class="two"><div class="fld"><label for="vd">Date</label><input id="vd" type="date"><span class="er" id="vd-e" aria-live="polite"></span></div><div class="fld"><label for="vt">Time of day</label><select id="vt"><option value="">Choose a time</option><option>Morning, 9:00 to 12:00</option><option>Afternoon, 12:00 to 16:00</option><option>Evening, 16:00 to 19:00</option></select><span class="er" id="vt-e" aria-live="polite"></span></div></div>
+    <div class="fld"><label for="vm">Anything we should know? (optional)</label><textarea id="vm"></textarea></div>
+    <button class="btn" type="submit">Request viewing</button>
+   </form>
+   <div class="ok" id="ok" role="status" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-7"/></svg><h3>Viewing requested</h3><p id="okt"></p></div>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer><div class="wrap fg">
+ <div><a class="logo" href="#top" style="margin-bottom:8px">Aurelia Estates</a><p>Boutique residential brokerage for villas, penthouses and townhouses across four neighborhoods.</p></div>
+ <div><h3>Explore</h3><ul id="flinks"></ul></div>
+ <div><h3>Neighborhoods</h3><ul id="fn"></ul></div>
+ <div><h3>Office</h3><p>90th Street, Fifth Settlement, New Cairo<br>Open daily, 9:00 to 19:00</p></div>
+</div></footer>
+<div class="credit"><div class="wrap">© 2026 · Designed &amp; developed by Mohamed Yousry · <a href="mailto:wx33693@gmail.com">wx33693@gmail.com</a></div></div>
+
+<div class="md" id="md" role="dialog" aria-modal="true" aria-labelledby="mt" aria-hidden="true"><div class="sheet" id="sh"></div></div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const $$$=n=>"EGP "+Math.round(n).toLocaleString("en-US");
+const NAV=[["listings","Homes"],["areas","Neighborhoods"],["calculator","Calculator"],["agents","Agents"],["viewing","Viewing"]];
+$("#links").innerHTML=NAV.map(([i,t])=>`<li><a href="#${i}">${t}</a></li>`).join("");
+$("#menu").innerHTML=NAV.map(([i,t])=>`<a href="#${i}">${t}</a>`).join("");
+$("#flinks").innerHTML=NAV.map(([i,t])=>`<li><a href="#${i}">${t}</a></li>`).join("");
+const bur=$("#bur"),mn=$("#menu");
+const setMenu=o=>{mn.classList.toggle("open",o);bur.setAttribute("aria-expanded",o);bur.setAttribute("aria-label",o?"Close menu":"Open menu");$("#bi").setAttribute("d",o?"M6 6l12 12M18 6L6 18":"M4 7h16M4 12h16M4 17h16");document.body.style.overflow=o?"hidden":""};
+bur.onclick=()=>setMenu(!mn.classList.contains("open"));$$("a",mn).forEach(a=>a.onclick=()=>setMenu(false));
+matchMedia("(min-width:960px)").onchange=e=>e.matches&&setMenu(false);
+const act=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&$$(".links a,.menu a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id))),{rootMargin:"-45% 0px -50% 0px"});
+NAV.forEach(([i])=>act.observe($("#"+i)));
+const rvo=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");rvo.unobserve(e.target)}}),{threshold:.1});
+const watch=()=>$$(".rv:not(.in)").forEach(el=>rvo.observe(el));
+/* data */
+const AREAS=[
+{n:"Sheikh Zayed",d:"Gated compounds, wide boulevards and golf-course villas west of Cairo.",pal:["#0d2a24","#2b8f7a"]},
+{n:"North Coast",d:"Sea-view chalets and penthouses along the Mediterranean.",pal:["#0a2b3a","#1a7f93"]},
+{n:"Mostakbal City",d:"A fast-growing community of family townhouses and green belts.",pal:["#16261b","#4a8f5c"]},
+{n:"New Cairo",d:"Established compounds, international schools and lagoon-side living.",pal:["#0b2430","#2a7fa5"]}];
+const L=[
+{id:1,t:"Palm Grove Villa",loc:"Sheikh Zayed",type:"Villa",price:52000000,bd:5,ba:6,sf:600,pal:["#082a30","#1f7a73","#ffe3b8"],d:"A standalone villa in a gated compound, with a private pool, landscaped garden, roof terrace and a chef’s kitchen that opens to the patio.",f:["Private pool","Roof terrace","Smart home","3-car garage"]},
+{id:2,t:"Sea Crown Penthouse",loc:"North Coast",type:"Penthouse",price:48000000,bd:4,ba:5,sf:380,pal:["#0a1f3a","#2a7fa5","#fff0c8"],d:"A top-floor penthouse with a wraparound terrace, private plunge pool and open Mediterranean views from every bedroom.",f:["Plunge pool","Wraparound terrace","Beach access","Two parking bays"]},
+{id:3,t:"Garden Row No. 7",loc:"Mostakbal City",type:"Townhouse",price:14500000,bd:3,ba:3,sf:220,pal:["#16261b","#4a8f5c","#ffe8b0"],d:"A corner townhouse with a sunlit private garden, a double-height living room and a new kitchen, near the community’s main park.",f:["Private garden","Corner unit","Maid’s room","Club access"]},
+{id:4,t:"Lagoon Residence",loc:"New Cairo",type:"Villa",price:36000000,bd:4,ba:4,sf:450,pal:["#0b2430","#2a7fa5","#ffd9a0"],d:"A contemporary lagoon-side villa with a double-height living room, a heated pool and a guest annex.",f:["Lagoon view","Heated pool","Guest annex","Solar water heating"]},
+{id:5,t:"Skyline Loft 18",loc:"New Cairo",type:"Penthouse",price:12500000,bd:2,ba:2,sf:165,pal:["#13213a","#4a63b0","#ffe3b8"],d:"A corner penthouse on the 18th floor with floor-to-ceiling glass, a private roof and access to the tower’s spa and gym.",f:["Private roof","Corner views","Spa and gym","Secure parking"]},
+{id:6,t:"Courtyard Mews",loc:"Mostakbal City",type:"Townhouse",price:8900000,bd:2,ba:2,sf:140,pal:["#26261a","#8f7a3a","#fff0c0"],d:"A bright mews house with a courtyard garden, vaulted ceilings and a studio room over the garage.",f:["Courtyard","Studio room","Garage","Quiet cul-de-sac"]},
+{id:7,t:"Hilltop Estate",loc:"Sheikh Zayed",type:"Villa",price:85000000,bd:6,ba:7,sf:760,pal:["#10242a","#2a8f8a","#ffe0b0"],d:"A landmark estate on an elevated plot with a screening room, guest wing, padel court and wide views over the golf course.",f:["Padel court","Screening room","Guest wing","Staff quarters"]},
+{id:8,t:"Lagoon Townhouse",loc:"New Cairo",type:"Townhouse",price:19500000,bd:3,ba:4,sf:270,pal:["#0c2a2f","#2f8f9a","#ffe8b8"],d:"A three-storey townhouse steps from the lagoon, with a rooftop terrace and a garden studio.",f:["Rooftop terrace","Garden studio","EV charging","Lagoon access"]},
+{id:9,t:"The Gallery Residence",loc:"North Coast",type:"Penthouse",price:31000000,bd:3,ba:3,sf:270,pal:["#12212e","#3f7f9a","#ffd9a0"],d:"A designer penthouse built around an art wall, a double-height lounge and a terrace with a plunge pool facing the sea.",f:["Plunge pool","Art lighting","Double-height lounge","Concierge"]}];
+const TYPES=["Villa","Penthouse","Townhouse"],PR=[[15000000,"Up to EGP 15M"],[35000000,"Up to EGP 35M"],[60000000,"Up to EGP 60M"]];
+const fill=(el,first,arr)=>el.innerHTML=`<option value="">${first}</option>`+arr.map(([v,t])=>`<option value="${v}">${t}</option>`).join("");
+["h","f"].forEach(p=>{fill($("#"+p+"l"),"All locations",AREAS.map(a=>[a.n,a.n]));fill($("#"+p+"t"),"All types",TYPES.map(t=>[t,t]));fill($("#"+p+"p"),"Any price",PR)});
+/* artwork */
+const rnd=s=>()=>(s=(s*16807)%2147483647)/2147483647;
+function vis(l){const[c1,c2,c3]=l.pal,r=rnd(l.id*131+7),g="v"+l.id;
+ let s=`<defs><linearGradient id="${g}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs><rect width="120" height="80" fill="url(#${g})"/><circle cx="${20+r()*80}" cy="${14+r()*8}" r="5" fill="${c3}" opacity=".85"/>`;
+ for(let i=0;i<14;i++)s+=`<circle cx="${r()*120}" cy="${r()*30}" r=".35" fill="#fff" opacity=".6"/>`;
+ const win=(x,y,w,h)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c3}" opacity="${.5+r()*.5}"/>`;
+ if(l.type==="Villa"){s+=`<path d="M0 50L25 36L55 46L85 32L120 48V80H0Z" fill="#06100e" opacity=".55"/><rect x="14" y="40" width="70" height="4" fill="#040a09"/><rect x="18" y="44" width="62" height="20" fill="#071513"/>`;for(let i=0;i<4;i++)s+=win(21+i*14.5,47,11,14);s+=`<rect x="52" y="30" width="38" height="10" fill="#040a09"/>${win(55,32,32,6)}<rect x="0" y="64" width="120" height="16" fill="#041412"/><rect x="22" y="67" width="64" height="8" rx="1" fill="${c2}" opacity=".9"/><circle cx="104" cy="52" r="10" fill="#041412"/><circle cx="8" cy="56" r="9" fill="#041412"/>`}
+ else if(l.type==="Penthouse"){for(let i=0;i<7;i++){const w=8+r()*9,h=22+r()*34,x=i*18-4;s+=`<rect x="${x}" y="${80-h}" width="${w}" height="${h}" fill="#071513" opacity=".7"/>`}
+  s+=`<rect x="46" y="8" width="28" height="72" fill="#040a09"/>`;for(let y=12;y<76;y+=7)for(let x=49;x<72;x+=7)if(r()>.3)s+=win(x,y,4,4);s+=`<rect x="0" y="72" width="120" height="8" fill="${c2}" opacity=".5"/>`}
+ else{s+=`<rect x="0" y="66" width="120" height="14" fill="#041412"/>`;[[10,34],[44,40],[78,36]].forEach(([x,y],i)=>{s+=`<rect x="${x}" y="${y}" width="30" height="${66-y}" fill="${["#0b1c18","#10261f","#0b1c18"][i]}"/><path d="M${x-2} ${y}L${x+15} ${y-12}L${x+32} ${y}Z" fill="#040a09"/>`;for(let j=0;j<3;j++)s+=win(x+4+j*8,y+6,5,7)+win(x+4+j*8,y+18,5,7)});}
+ return`<svg viewBox="0 0 120 80" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of ${l.t}, a ${l.type.toLowerCase()} in ${l.loc}">${s}</svg>`}
+/* listings */
+const fav=new Set(),ico=(d)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const I={bd:ico('<path d="M3 18V8M3 14h18v4M21 14v-3a3 3 0 00-3-3h-7v6"/>'),ba:ico('<path d="M4 12h16v3a4 4 0 01-4 4H8a4 4 0 01-4-4zM6 12V6a2 2 0 013.5-1.3"/>'),sf:ico('<path d="M4 4h16v16H4zM4 12h8V4"/>'),heart:ico('<path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0112 7.4 4.3 4.3 0 0119.5 10c0 5.4-7.5 10-7.5 10z"/>')};
+const F={l:"",t:"",p:"",s:"f",o:false};
+function render(){let a=L.filter(x=>(!F.l||x.loc===F.l)&&(!F.t||x.type===F.t)&&(!F.p||x.price<=+F.p)&&(!F.o||fav.has(x.id)));
+ if(F.s==="pa")a.sort((x,y)=>x.price-y.price);else if(F.s==="pd")a.sort((x,y)=>y.price-x.price);else if(F.s==="sf")a.sort((x,y)=>y.sf-x.sf);
+ $("#res").textContent=`${a.length} ${a.length===1?"home":"homes"} found`;
+ $("#grid").innerHTML=a.length?a.map((l,i)=>`<article class="lc" style="animation-delay:${i*.05}s"><div class="lv" style="position:relative"><button class="lv" data-o="${l.id}" aria-label="View details for ${l.t}">${vis(l)}<span class="pill">${$$$(l.price)}</span></button><button class="fav" data-f="${l.id}" aria-pressed="${fav.has(l.id)}" aria-label="${fav.has(l.id)?"Remove "+l.t+" from saved":"Save "+l.t}">${I.heart}</button></div><div class="lb"><span class="loc">${l.loc} · ${l.type}</span><h3>${l.t}</h3><div class="sp"><span>${I.bd}${l.bd} bd</span><span>${I.ba}${l.ba} ba</span><span>${I.sf}${l.sf} m²</span></div><button class="btn ghost" data-o="${l.id}">View details</button></div></article>`).join(""):`<div class="empty"><h3>No homes match yet</h3><p>Try a higher price or a different neighborhood.</p><button class="btn" id="rs">Clear all filters</button></div>`;
+ $$("[data-o]").forEach(b=>b.onclick=()=>openM(+b.dataset.o,b));
+ $$("[data-f]").forEach(b=>b.onclick=()=>{const id=+b.dataset.f;fav.has(id)?fav.delete(id):fav.add(id);favUI();render()});
+ const rs=$("#rs");if(rs)rs.onclick=()=>{Object.assign(F,{l:"",t:"",p:"",s:"f",o:false});sync();render()}}
+function favUI(){const c=$("#fc");c.hidden=!fav.size;c.textContent=fav.size}
+function sync(){$("#fl").value=F.l;$("#ft").value=F.t;$("#fp").value=F.p;$("#fs").value=F.s;$("#fo").setAttribute("aria-pressed",F.o)}
+[["fl","l"],["ft","t"],["fp","p"],["fs","s"]].forEach(([id,k])=>$("#"+id).onchange=e=>{F[k]=e.target.value;render()});
+$("#fo").onclick=()=>{F.o=!F.o;sync();render()};
+$("#favnav").onclick=()=>{F.o=true;sync();render();$("#listings").scrollIntoView({behavior:"smooth"})};
+$("#hs-f").onsubmit=e=>{e.preventDefault();F.l=$("#hl").value;F.t=$("#ht").value;F.p=$("#hp").value;sync();render();$("#listings").scrollIntoView({behavior:"smooth"})};
+/* neighborhoods */
+$("#nb").innerHTML=AREAS.map((a,i)=>{const n=L.filter(l=>l.loc===a.n),avg=n.reduce((s,l)=>s+l.price,0)/n.length,r=rnd(i*71+5);let w="";for(let k=0;k<9;k++)w+=`<path d="M-10 ${40+k*22+r()*10}Q100 ${10+k*22+r()*30} 210 ${40+k*22+r()*10}T410 ${30+k*22}" fill="none" stroke="${a.pal[1]}" stroke-width="1" opacity="${.15+k*.06}"/>`;
+ return`<button class="nc rv" data-a="${a.n}" aria-label="See homes in ${a.n}"><svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="200" height="300" fill="${a.pal[0]}"/>${w}</svg><div><h3>${a.n}</h3><p>${a.d}</p><b>${n.length} homes · avg ${$$$(avg/1e6*1e6).replace(/(\d)(?=(\d{3})+$)/g,"$1")}</b></div></button>`}).join("");
+$$(".nc").forEach(b=>b.onclick=()=>{F.l=b.dataset.a;sync();render();$("#listings").scrollIntoView({behavior:"smooth"})});
+$("#fn").innerHTML=AREAS.map(a=>`<li><a href="#listings" data-a="${a.n}">${a.n}</a></li>`).join("");
+$$("#fn a").forEach(a=>a.onclick=()=>{F.l=a.dataset.a;sync();render()});
+/* modal */
+const md=$("#md");let lastF,cur;
+function openM(id,from){cur=L.find(x=>x.id===id);lastF=from;const l=cur;
+ $("#sh").innerHTML=`<button class="ib x" id="mx" aria-label="Close details">${ico('<path d="M6 6l12 12M18 6L6 18"/>')}</button><div class="mh">${vis(l)}</div><div class="mb"><div><span class="loc">${l.loc} · ${l.type}</span><h2 id="mt">${l.t}</h2><div class="price">${$$$(l.price)}</div><div class="spec"><div><b>${l.bd}</b><span>Bedrooms</span></div><div><b>${l.ba}</b><span>Bathrooms</span></div><div><b>${l.sf}</b><span>m²</span></div></div><p style="color:var(--m)">${l.d}</p><div class="ft">${l.f.map(f=>`<span>${f}</span>`).join("")}</div></div><div class="side"><p>Estimated monthly payment</p><b class="mp">${$$$(pay(l.price*.8,18,20))}</b><p>Based on 20% down at 18% over 20 years.</p><button class="btn" id="mv">Schedule a viewing</button><button class="btn ghost" id="mc">Use in calculator</button><button class="btn ghost" id="mf" aria-pressed="${fav.has(l.id)}">${fav.has(l.id)?"Saved":"Save this home"}</button></div></div>`;
+ md.classList.add("open");md.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";$("#mx").focus();
+ $("#mx").onclick=closeM;$("#mv").onclick=()=>{closeM();$("#vh").value=l.id;$("#viewing").scrollIntoView({behavior:"smooth"})};
+ $("#mc").onclick=()=>{closeM();setPrice(l.price);$("#calculator").scrollIntoView({behavior:"smooth"})};
+ $("#mf").onclick=e=>{fav.has(l.id)?fav.delete(l.id):fav.add(l.id);favUI();render();e.target.textContent=fav.has(l.id)?"Saved":"Save this home"}}
+function closeM(){md.classList.remove("open");md.setAttribute("aria-hidden","true");document.body.style.overflow="";lastF&&document.contains(lastF)&&lastF.focus()}
+md.onclick=e=>{if(e.target===md)closeM()};
+addEventListener("keydown",e=>{if(!md.classList.contains("open"))return;if(e.key==="Escape")closeM();else if(e.key==="Tab"){const f=$$("button",$("#sh")),i=f.indexOf(document.activeElement);if(e.shiftKey&&i<=0){e.preventDefault();f.at(-1).focus()}else if(!e.shiftKey&&i===f.length-1){e.preventDefault();f[0].focus()}}});
+/* calculator */
+function pay(L0,rate,yrs){const n=yrs*12,r=rate/1200;return r?L0*r/(1-Math.pow(1+r,-n)):L0/n}
+const cp=$("#cp"),cpr=$("#cpr"),cd=$("#cd"),cr=$("#cr"),cy=$("#cy");
+function setPrice(v){cp.value=v;cpr.value=Math.min(Math.max(v,3000000),100000000);calc()}
+function calc(){const P=Math.max(+cp.value||0,0),dp=+cd.value,R=Math.max(+cr.value||0,0),Y=+cy.value,down=P*dp/100,loan=P-down,m=pay(loan,R,Y),tot=m*Y*12,int=Math.max(tot-loan,0);
+ $("#cpv").textContent=$$$(P);$("#cdv").textContent=`${dp}% · ${$$$(down)}`;$("#mo").innerHTML=`${$$$(m)} <small>/ month</small>`;
+ const pp=tot?loan/tot*100:100;$("#dn").setAttribute("stroke-dasharray",`${pp.toFixed(1)} ${(100-pp).toFixed(1)}`);
+ $("#lp").textContent=$$$(loan);$("#li").textContent=$$$(int);$("#ka").textContent=$$$(loan);$("#kd").textContent=$$$(down);$("#kt").textContent=$$$(int)}
+cpr.oninput=()=>{cp.value=cpr.value;calc()};[cp,cd,cr,cy].forEach(e=>e.oninput=calc);cy.onchange=calc;
+cp.value=20000000;cpr.value=20000000;cd.value=20;cr.value=18;
+/* agents, testimonials */
+const AG=[["Laila Hassan","Principal Broker","Sheikh Zayed and New Cairo","#14B8A6"],["Karim Fawzy","Senior Agent","North Coast penthouses","#4f9be8"],["Mariam Saad","Buyer’s Agent","Mostakbal City townhouses","#e0a458"]];
+$("#ag").innerHTML=AG.map(([n,r,s,c])=>`<div class="card ag1 rv"><svg class="av" viewBox="0 0 72 72" role="img" aria-label="Initials for ${n}"><defs><linearGradient id="a${n[0]}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c}"/><stop offset="1" stop-color="#0a1512"/></linearGradient></defs><circle cx="36" cy="36" r="36" fill="url(#a${n[0]})"/><text x="36" y="45" text-anchor="middle" font-family="Fraunces,serif" font-size="26" fill="#fff">${n.split(" ").map(w=>w[0]).join("")}</text></svg><div><h3>${n}</h3><div class="rl">${r}</div><div class="st">${s}</div></div></div>`).join("");
+const TQ=[["We saw one home and knew. Laila handled the offer and the inspection with a calm we didn’t expect to find.","Nour and Omar A.","bought in Sheikh Zayed"],["Karim sold our penthouse in nine days, above asking, and never once made us feel rushed.","Hala S.","sold on the North Coast"],["Mariam found us the townhouse before it went public. The garden is exactly what we described.","The Mansour family","bought in Mostakbal City"]];
+$("#tq").innerHTML=TQ.map(([q,n,w])=>`<figure class="card rv" style="margin:0"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“${q}”</blockquote><cite><b>${n}</b>, ${w}</cite></figure>`).join("");
+/* form */
+const vh=$("#vh");vh.innerHTML='<option value="">Choose a home</option>'+L.map(l=>`<option value="${l.id}">${l.t}, ${l.loc}</option>`).join("");
+const td=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);$("#vd").min=td;
+const err=(id,m)=>{$("#"+id+"-e").textContent=m;$("#"+id).setAttribute("aria-invalid",!!m);return!m};
+$("#vf").onsubmit=e=>{e.preventDefault();const n=$("#vn").value.trim(),em=$("#ve").value.trim(),ph=$("#vph").value.trim(),d=$("#vd").value;
+ const r=[err("vn",n.length<2?"Enter your full name.":""),err("ve",/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)?"":"Enter a valid email, like name@example.com."),err("vph",!ph||ph.replace(/\D/g,"").length>=7?"":"Enter at least 7 digits, or leave this blank."),err("vh",vh.value?"":"Choose a home to view."),err("vd",!d?"Pick a date.":d<td?"Choose today or a later date.":""),err("vt",$("#vt").value?"":"Choose a time of day.")];
+ if(r.includes(false)){$("#vf [aria-invalid=true]").focus();return}
+ const h=L.find(l=>l.id==vh.value),fd=new Date(d+"T12:00").toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"});
+ $("#okt").textContent=`Thank you, ${n.split(" ")[0]}. We’ve requested a viewing of ${h.t} on ${fd} (${$("#vt").value.split(",")[0].toLowerCase()}). Your agent will email ${em} to confirm.`;$("#fbox").classList.add("done");$("#ok").focus()};
+$$("#vf input,#vf select").forEach(i=>i.addEventListener("input",()=>i.getAttribute("aria-invalid")==="true"&&err(i.id,"")));
+render();calc();watch();
+</script>
+</body>
+</html>
