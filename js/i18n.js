@@ -1,5 +1,5 @@
 // اللغة: عربي (افتراضي) وإنجليزي. النص العربي مكتوب في index.html نفسه، وهنا الترجمة الإنجليزية بس.
-var LANG=(document.documentElement.dataset.lang==="en")?"en":"ar";
+var LANG=(document.documentElement.dataset.lang==="ar")?"ar":"en";
 var I18N_AR={};
 document.querySelectorAll("[data-i18n]").forEach(function(n){I18N_AR[n.getAttribute("data-i18n")]=n.textContent});
 document.querySelectorAll("[data-i18n-aria]").forEach(function(n){I18N_AR["@"+n.getAttribute("data-i18n-aria")]=n.getAttribute("aria-label")||""});
