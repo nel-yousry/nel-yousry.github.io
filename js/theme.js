@@ -1,2 +1,1 @@
-try{document.documentElement.dataset.theme=localStorage.getItem("nel-theme")||"dark";
-if(localStorage.getItem("nel-lang")==="en"){document.documentElement.lang="en";document.documentElement.dir="ltr";document.documentElement.dataset.lang="en"}}catch(e){document.documentElement.dataset.theme="dark"}
+try{var t=localStorage.getItem("nel-theme")||"dark",l=localStorage.getItem("nel-lang")||"en";document.documentElement.dataset.theme=t;document.documentElement.dataset.lang=l;if(l==="ar"){document.documentElement.lang="ar";document.documentElement.dir="rtl"}else{document.documentElement.lang="en";document.documentElement.dir="ltr"}}catch(e){document.documentElement.dataset.theme="dark";document.documentElement.dataset.lang="en"}
