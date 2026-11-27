@@ -23,3 +23,29 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
 $$(".win,.rv").forEach(e=>io.observe(e));
 const st=$("#steps"),fill=$("#fill");function prog(){const r=st.getBoundingClientRect(),h=innerHeight;
 fill.style.transform="scaleY("+Math.max(0,Math.min(1,(h*.6-r.top)/r.height))+")"}addEventListener("scroll",prog,{passive:true});prog();
+
+/* hero scene parallax: subtle depth on pointer + scroll, off for reduced motion */
+(function(){
+  var s=document.querySelector('.scene');
+  if(!s||!window.matchMedia)return;
+  var rm=window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(rm.matches)return;
+  var tx=0,ty=0,raf=0;
+  function apply(){raf=0;s.style.setProperty('--px',tx.toFixed(2));s.style.setProperty('--py',ty.toFixed(2));}
+  function queue(){if(!raf)raf=requestAnimationFrame(apply);}
+  window.addEventListener('pointermove',function(e){
+    if(e.pointerType==='touch')return;
+    var r=s.getBoundingClientRect();
+    var cx=(e.clientX-(r.left+r.width/2))/Math.max(1,window.innerWidth/2);
+    var cy=(e.clientY-(r.top+r.height/2))/Math.max(1,window.innerHeight/2);
+    tx=-Math.max(-1,Math.min(1,cx))*1.4;
+    ty=-Math.max(-1,Math.min(1,cy))*1.0;
+    queue();
+  },{passive:true});
+  window.addEventListener('scroll',function(){
+    var r=s.getBoundingClientRect();
+    var p=(window.innerHeight/2-(r.top+r.height/2))/window.innerHeight;
+    ty=Math.max(-1,Math.min(1,p))*-1.2;
+    queue();
+  },{passive:true});
+})();
